@@ -3588,3 +3588,74 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
   .glass-shard { opacity: .5; }
   .glass-fracture { opacity: .58; }
 }
+
+
+/* HERO PORTRAIT RESTORE — keep the uploaded photo visible beside the intro */
+.cinematic-hero {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: clamp(28px, 4vw, 70px) !important;
+  padding: 135px 7% 95px !important;
+}
+.cinematic-copy {
+  flex: 0 1 52% !important;
+  width: auto !important;
+  max-width: 680px !important;
+  min-width: 0;
+  text-align: left !important;
+}
+.hero-visual {
+  display: block !important;
+  flex: 0 1 46% !important;
+  width: 46% !important;
+  max-width: 610px !important;
+  min-width: 360px;
+  justify-self: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.portrait-stage {
+  width: 100%;
+  height: clamp(430px, 43vw, 600px) !important;
+}
+.portrait-frame {
+  display: block !important;
+  inset: 0 !important;
+  overflow: visible !important;
+  clip-path: none !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: translateZ(20px);
+}
+.portrait-frame::before,
+.portrait-frame::after { display: none !important; }
+.portrait-img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 22px 48px rgba(0,0,0,.55)) saturate(.95) contrast(1.04) !important;
+  transform: none !important;
+}
+@media (max-width: 760px) {
+  .cinematic-hero {
+    flex-direction: column !important;
+    padding: 120px 7% 90px !important;
+  }
+  .cinematic-copy {
+    flex: 0 1 auto !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .hero-visual {
+    flex: 0 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 500px !important;
+  }
+  .portrait-stage { height: min(112vw, 500px) !important; }
+}
