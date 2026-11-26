@@ -4409,3 +4409,60 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
   #projects .project-card,#projects .project-image img { transition:none !important; }
   #projects .project-card:hover { transform:none !important; }
 }
+
+
+/* =========================================
+   3D PUZZLE PORTRAIT ASSEMBLY
+========================================= */
+#home .portrait-frame { isolation: isolate !important; }
+#home .portrait-frame .portrait-img {
+  position: relative !important;
+  z-index: 1 !important;
+  transition: opacity .35s ease !important;
+}
+#home .portrait-frame.puzzle-assembling .portrait-img { opacity: 0 !important; }
+#home .portrait-puzzle {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  perspective: 1100px;
+  pointer-events: none;
+  overflow: visible;
+}
+#home .portrait-puzzle-piece {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  background-repeat: no-repeat;
+  background-size: 400% 400%;
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 9px 18px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.12);
+  transform-style: preserve-3d;
+  opacity: 0;
+  animation: portraitPuzzleSnap .95s cubic-bezier(.16,.82,.22,1) forwards;
+  animation-delay: var(--piece-delay, 0ms);
+  will-change: transform, opacity;
+}
+#home .portrait-puzzle-piece::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.2), transparent 42%, rgba(0,0,0,.22));
+  pointer-events: none;
+}
+@keyframes portraitPuzzleSnap {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--piece-x), var(--piece-y), 180px) rotateX(var(--piece-rx)) rotateY(var(--piece-ry)) rotateZ(var(--piece-rz)) scale(.72);
+    filter: brightness(1.7);
+  }
+  65% { opacity: 1; filter: brightness(1.12); }
+  100% { opacity: 1; transform: translate3d(0,0,0) rotateX(0) rotateY(0) rotateZ(0) scale(1); filter: brightness(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #home .portrait-puzzle { display: none !important; }
+  #home .portrait-frame.puzzle-assembling .portrait-img { opacity: 1 !important; }
+}
