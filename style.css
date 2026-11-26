@@ -3849,3 +3849,30 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
     height: min(82vw, 440px) !important;
   }
 }
+
+
+/* Increase hero portrait HEIGHT (not just its width) */
+.cinematic-hero .portrait-stage {
+  height: clamp(560px, 52vw, 740px) !important;
+  min-height: 560px !important;
+}
+.cinematic-hero .portrait-frame {
+  height: 100% !important;
+  aspect-ratio: auto !important;
+  max-width: none !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: translateZ(20px) !important;
+}
+.cinematic-hero .portrait-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+@media (max-width: 760px) {
+  .cinematic-hero .portrait-stage {
+    height: min(115vw, 560px) !important;
+    min-height: 420px !important;
+  }
+}
