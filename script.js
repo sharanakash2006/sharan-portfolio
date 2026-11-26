@@ -207,3 +207,128 @@ if (contactForm) {
     window.location.href = `mailto:sharanakash2006@gmail.com?subject=${subject}&body=${body}`;
   });
 }
+
+
+// =========================================================
+// CINEMATIC EXPERIENCE — loader, navigation, progress, 3D scene
+// =========================================================
+(() => {
+  const loader = document.getElementById("siteLoader");
+  const finishLoader = () => window.setTimeout(() => loader?.classList.add("loaded"), 450);
+  if (document.readyState === "complete") finishLoader();
+  else window.addEventListener("load", finishLoader, { once: true });
+  window.setTimeout(finishLoader, 2400);
+
+  const progress = document.getElementById("scrollProgress");
+  const header = document.querySelector("header");
+  const navLinks = [...document.querySelectorAll('header nav a[href^="#"]')];
+  const sections = navLinks.map(link => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+
+  const updateScrollUI = () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    if (progress) progress.style.width = (ratio * 100) + "%";
+    header?.classList.toggle("scrolled", window.scrollY > 24);
+  };
+  window.addEventListener("scroll", updateScrollUI, { passive: true });
+  updateScrollUI();
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => {
+          const active = link.getAttribute("href") === "#" + entry.target.id;
+          link.classList.toggle("active", active);
+          if (active) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
+    sections.forEach(section => navObserver.observe(section));
+  }
+
+  // Pause the decorative video when the tab is hidden to save battery.
+  const video = document.querySelector(".cinema-video");
+  document.addEventListener("visibilitychange", () => {
+    if (!video) return;
+    if (document.hidden) video.pause();
+    else video.play().catch(() => {});
+  });
+
+  // Three.js: lightweight depth particle field, no external model downloads.
+  const canvas = document.getElementById("threeScene");
+  const hero = document.querySelector(".cinematic-hero");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!canvas || !hero || reduced || !window.THREE) return;
+
+  let renderer, scene, camera, points, frameId;
+  const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+    renderer.setSize(hero.clientWidth, hero.clientHeight, false);
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(55, hero.clientWidth / hero.clientHeight, .1, 100);
+    camera.position.z = 16;
+
+    const count = window.innerWidth < 700 ? 420 : 850;
+    const positions = new Float32Array(count * 3);
+    const sizes = new Float32Array(count);
+    for (let i = 0; i < count; i++) {
+      positions[i * 3] = (Math.random() - .5) * 27;
+      positions[i * 3 + 1] = (Math.random() - .5) * 16;
+      positions[i * 3 + 2] = (Math.random() - .5) * 13;
+      sizes[i] = .35 + Math.random() * 1.35;
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+    const material = new THREE.PointsMaterial({
+      color: 0xff4058, size: .045, transparent: true,
+      opacity: .78, blending: THREE.AdditiveBlending,
+      depthWrite: false, sizeAttenuation: true
+    });
+    points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    const resize = () => {
+      const w = hero.clientWidth, h = hero.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+    window.addEventListener("resize", resize, { passive: true });
+    hero.addEventListener("pointermove", event => {
+      if (event.pointerType === "touch") return;
+      const rect = hero.getBoundingClientRect();
+      pointer.tx = ((event.clientX - rect.left) / rect.width - .5) * 1.4;
+      pointer.ty = ((event.clientY - rect.top) / rect.height - .5) * 1.0;
+    }, { passive: true });
+    hero.addEventListener("pointerleave", () => { pointer.tx = 0; pointer.ty = 0; });
+
+    const clock = new THREE.Clock();
+    const animate = () => {
+      frameId = requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+      pointer.x += (pointer.tx - pointer.x) * .025;
+      pointer.y += (pointer.ty - pointer.y) * .025;
+      points.rotation.y = t * .018 + pointer.x * .12;
+      points.rotation.x = Math.sin(t * .12) * .035 + pointer.y * .08;
+      points.position.y = Math.sin(t * .18) * .12;
+      camera.position.x = pointer.x * .35;
+      camera.position.y = -pointer.y * .25;
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && frameId) cancelAnimationFrame(frameId);
+      else if (!document.hidden && !frameId) animate();
+    });
+  } catch (error) {
+    console.warn("3D scene unavailable; keeping video and CSS effects.", error);
+    if (renderer) renderer.dispose();
+  }
+})();
