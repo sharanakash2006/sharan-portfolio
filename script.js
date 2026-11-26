@@ -113,3 +113,39 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
     });
   });
 }
+
+
+// ======================
+// Interactive 3D Skill Tiles
+// ======================
+const skillCards = document.querySelectorAll(".skill-card");
+
+if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  skillCards.forEach((card) => {
+    let skillFrame = null;
+    card.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") return;
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * 9;
+      const rotateX = (0.5 - y) * 7;
+      if (skillFrame) cancelAnimationFrame(skillFrame);
+      skillFrame = requestAnimationFrame(() => {
+        card.style.setProperty("--skill-x", `${rotateX}deg`);
+        card.style.setProperty("--skill-y", `${rotateY}deg`);
+        card.style.setProperty("--skill-glow-x", `${x * 100}%`);
+        card.style.setProperty("--skill-glow-y", `${y * 100}%`);
+        card.style.setProperty("--skill-light", "1");
+      });
+    });
+    card.addEventListener("pointerleave", () => {
+      if (skillFrame) cancelAnimationFrame(skillFrame);
+      card.style.setProperty("--skill-x", "0deg");
+      card.style.setProperty("--skill-y", "0deg");
+      card.style.setProperty("--skill-glow-x", "50%");
+      card.style.setProperty("--skill-glow-y", "50%");
+      card.style.setProperty("--skill-light", "0");
+    });
+  });
+}
