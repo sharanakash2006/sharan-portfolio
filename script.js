@@ -188,3 +188,22 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
     });
   });
 }
+
+
+// ======================
+// Contact form — open a prefilled email draft
+// ======================
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const fields = contactForm.querySelectorAll("input, textarea");
+    const [name, email, company, message] = Array.from(fields, (field) => field.value.trim());
+    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nCompany: ${company || "Not provided"}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:sharanakash2006@gmail.com?subject=${subject}&body=${body}`;
+  });
+}
