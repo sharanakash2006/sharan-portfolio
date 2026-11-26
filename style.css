@@ -2256,3 +2256,36 @@ body { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   .cinematic-hero *, .cinematic-hero *::before, .cinematic-hero *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+
+/* Main hero photograph: full-width cinematic composition */
+.cinematic-hero {
+  background:
+    linear-gradient(90deg,
+      rgba(5,5,6,.99) 0%,
+      rgba(5,5,6,.94) 28%,
+      rgba(5,5,6,.72) 46%,
+      rgba(5,5,6,.20) 69%,
+      rgba(5,5,6,.08) 100%),
+    linear-gradient(0deg, rgba(5,5,6,.45), transparent 32%),
+    url("images/hero-main.jpg.jpg") center center / cover no-repeat,
+    #080809;
+}
+.cinematic-hero::before { opacity: .12; }
+.hero-grid { opacity: .08; }
+.portrait-frame {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.portrait-frame::after { display: none; }
+.portrait-img { opacity: 0; }
+.portrait-glow { opacity: .35; }
+@media (max-width: 760px) {
+  .cinematic-hero {
+    background:
+      linear-gradient(180deg, rgba(5,5,6,.65), rgba(5,5,6,.88) 54%, #080809 100%),
+      url("images/hero-main.jpg.jpg") 62% top / auto 62% no-repeat,
+      #080809;
+  }
+}
