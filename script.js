@@ -398,3 +398,23 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
     animatedSections.forEach(section => section.classList.add("revealed"));
   }
 })();
+
+
+// Welcome screen: reveal the existing portfolio home page on request.
+(() => {
+  const screen = document.getElementById("welcomeScreen");
+  const enter = document.getElementById("enterPortfolio");
+  if (!screen || !enter) return;
+  const openHome = () => {
+    screen.classList.add("is-leaving");
+    document.body.classList.remove("welcome-open");
+    window.setTimeout(() => screen.remove(), 900);
+    document.getElementById("home")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  document.body.classList.add("welcome-open");
+  enter.addEventListener("click", openHome);
+  screen.addEventListener("keydown", event => {
+    if (event.key === "Escape") openHome();
+  });
+  enter.focus({ preventScroll: true });
+})();
