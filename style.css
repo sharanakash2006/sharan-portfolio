@@ -2477,3 +2477,60 @@ body { margin: 0; }
   .hero-visual { max-width: 100% !important; }
   .portrait-stage { aspect-ratio: 1672 / 941 !important; }
 }
+
+
+/* RESTORE THE ORIGINAL FULL-WIDTH HERO FRAME SHOWN IN THE USER'S REFERENCE */
+.cinematic-hero {
+  display: flex !important;
+  position: relative !important;
+  align-items: center !important;
+  min-height: calc(100vh - 90px) !important;
+  padding: 110px 8% 70px !important;
+  overflow: hidden !important;
+  background-color: #050304 !important;
+  background-image:
+    linear-gradient(90deg,
+      rgba(5,3,4,.99) 0%,
+      rgba(5,3,4,.94) 28%,
+      rgba(5,3,4,.72) 46%,
+      rgba(5,3,4,.20) 69%,
+      rgba(5,3,4,.08) 100%),
+    linear-gradient(0deg, rgba(5,3,4,.35), transparent 42%),
+    url("./images/hero-main.jpg.jpg") !important;
+  background-position: center top !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+.cinematic-copy {
+  position: relative !important;
+  z-index: 5 !important;
+  width: min(680px, 55%) !important;
+  max-width: 680px !important;
+  flex: 0 1 680px !important;
+}
+.hero-visual {
+  display: none !important;
+}
+.hero-bottom-note { z-index: 6 !important; }
+
+@media (max-width: 760px) {
+  .cinematic-hero {
+    min-height: 100svh !important;
+    padding: 125px 7% 95px !important;
+    background-image:
+      linear-gradient(180deg,
+        rgba(5,3,4,.18) 0%,
+        rgba(5,3,4,.55) 28%,
+        rgba(5,3,4,.97) 62%,
+        #050304 100%),
+      url("./images/hero-main.jpg.jpg") !important;
+    background-position: 64% top !important;
+    background-size: auto 68%, cover !important;
+  }
+  .cinematic-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    padding-top: 230px !important;
+  }
+}
