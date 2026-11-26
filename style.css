@@ -2319,3 +2319,17 @@ body { margin: 0; }
   }
   .cinematic-copy { width: 100%; max-width: 100%; padding-top: 230px; }
 }
+
+
+/* Portrait crop alignment: keep face and upper body inside the frame */
+.portrait-frame {
+  overflow: hidden !important;
+}
+.portrait-frame .portrait-img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 79% center !important;
+  transform: scale(1.02) !important;
+}
