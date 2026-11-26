@@ -3827,3 +3827,25 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
     height: min(72vw, 380px) !important;
   }
 }
+
+
+/* Slightly enlarge the hero portrait while keeping it fully visible */
+.cinematic-hero {
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr) !important;
+}
+.cinematic-hero > .hero-visual {
+  max-width: 760px !important;
+}
+.cinematic-hero .portrait-stage {
+  height: clamp(470px, 44vw, 630px) !important;
+}
+.cinematic-hero .portrait-frame {
+  width: 100% !important;
+  max-width: 760px !important;
+  aspect-ratio: 16 / 9 !important;
+}
+@media (max-width: 760px) {
+  .cinematic-hero .portrait-stage {
+    height: min(82vw, 440px) !important;
+  }
+}
