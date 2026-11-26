@@ -4579,3 +4579,146 @@ body.welcome-open { overflow:hidden; }
 @media(prefers-reduced-motion:reduce) {
   .welcome-visual,.welcome-ring,.welcome-cube,.welcome-spark { animation:none!important; }
 }
+
+
+/* =========================================================
+   WELCOME SCREEN — VIDEO-LED CINEMATIC INTRO
+   ========================================================= */
+.welcome-screen {
+  isolation:isolate;
+  overflow:hidden;
+  background:#030305;
+}
+.welcome-live-video {
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.58;
+  filter:brightness(.52) saturate(1.35) contrast(1.12);
+  transform:scale(1.08);
+  animation:welcomeVideoDrift 24s ease-in-out infinite alternate;
+}
+.welcome-video-vignette {
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(3,3,6,.92) 0%,rgba(8,3,8,.62) 43%,rgba(5,3,8,.22) 100%),
+    linear-gradient(0deg,rgba(2,2,5,.88),transparent 42%,rgba(2,2,5,.42)),
+    radial-gradient(ellipse at 72% 48%,rgba(255,20,55,.24),transparent 48%);
+}
+.welcome-screen .welcome-backdrop {
+  z-index:-1;
+  background:
+    radial-gradient(circle at 72% 48%,rgba(255,22,58,.14),transparent 32%),
+    linear-gradient(120deg,rgba(4,4,8,.22),rgba(5,3,8,.5));
+}
+.welcome-screen .welcome-visual {
+  z-index:0;
+  right:2%;
+  left:auto;
+  top:50%;
+  width:min(66vw,900px);
+  height:min(78vh,760px);
+  opacity:.9;
+  transform:translateY(-50%);
+  filter:drop-shadow(0 0 42px rgba(255,22,58,.2));
+}
+.welcome-screen .welcome-content {
+  z-index:4;
+  width:min(650px,58vw);
+  margin-left:clamp(28px,8vw,140px);
+  margin-right:auto;
+  text-align:left;
+  align-items:flex-start;
+}
+.welcome-screen .welcome-monogram {
+  box-shadow:0 0 34px rgba(255,35,70,.3),inset 0 0 20px rgba(255,255,255,.06);
+}
+.welcome-screen .welcome-kicker {
+  letter-spacing:.28em;
+}
+.welcome-screen #welcomeTitle {
+  font-size:clamp(42px,6.2vw,88px);
+  line-height:.98;
+  letter-spacing:-.055em;
+  text-shadow:0 8px 36px rgba(0,0,0,.6);
+}
+.welcome-screen #welcomeTitle span {
+  color:#ff3457;
+  text-shadow:0 0 28px rgba(255,34,76,.34);
+}
+.welcome-screen .welcome-intro {
+  max-width:510px;
+  color:rgba(255,255,255,.76);
+  line-height:1.85;
+}
+.welcome-screen .welcome-enter {
+  min-height:58px;
+  padding:0 32px;
+  border:1px solid rgba(255,70,100,.7);
+  box-shadow:0 0 28px rgba(255,25,60,.22),inset 0 0 18px rgba(255,255,255,.07);
+  letter-spacing:.16em;
+  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
+}
+.welcome-screen .welcome-enter:hover {
+  transform:translateY(-4px) scale(1.025);
+  background:#f3234c;
+  box-shadow:0 0 48px rgba(255,25,60,.55);
+}
+.welcome-screen .welcome-foot {
+  width:min(560px,100%);
+  border-top:1px solid rgba(255,255,255,.17);
+  padding-top:18px;
+  color:rgba(255,255,255,.52);
+  letter-spacing:.13em;
+}
+.welcome-screen .welcome-ring {
+  border-color:rgba(255,65,95,.42);
+  box-shadow:0 0 26px rgba(255,24,65,.14),inset 0 0 25px rgba(255,24,65,.08);
+}
+.welcome-screen .welcome-cube i {
+  background:linear-gradient(135deg,rgba(255,50,83,.24),rgba(255,255,255,.035));
+  border-color:rgba(255,83,110,.8);
+  box-shadow:inset 0 0 28px rgba(255,25,65,.2),0 0 18px rgba(255,25,65,.24);
+  backdrop-filter:blur(4px);
+}
+.welcome-screen .welcome-data {
+  border-color:rgba(255,80,110,.25);
+  background:rgba(10,5,12,.34);
+  backdrop-filter:blur(12px);
+}
+@keyframes welcomeVideoDrift {
+  0% { transform:scale(1.08) translate3d(-.5%,0,0); }
+  100% { transform:scale(1.18) translate3d(.5%,-1%,0); }
+}
+@media(max-width:700px) {
+  .welcome-live-video { opacity:.48; }
+  .welcome-video-vignette {
+    background:linear-gradient(0deg,rgba(3,3,6,.94),rgba(3,3,6,.58) 65%,rgba(3,3,6,.35)),
+      radial-gradient(circle at 50% 30%,rgba(255,20,55,.22),transparent 55%);
+  }
+  .welcome-screen .welcome-visual {
+    left:50%;right:auto;top:34%;
+    width:125vw;height:56vh;
+    transform:translate(-50%,-50%);
+    opacity:.48;
+  }
+  .welcome-screen .welcome-content {
+    width:calc(100% - 44px);
+    margin:0 auto;
+    padding-top:36vh;
+    align-items:center;
+    text-align:center;
+  }
+  .welcome-screen #welcomeTitle { font-size:clamp(38px,11vw,62px); }
+  .welcome-screen .welcome-intro { font-size:14px; }
+  .welcome-screen .welcome-foot { justify-content:center; gap:12px; flex-wrap:wrap; font-size:9px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .welcome-live-video { animation:none; }
+}
