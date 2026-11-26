@@ -2333,3 +2333,15 @@ body { margin: 0; }
   object-position: 79% center !important;
   transform: scale(1.02) !important;
 }
+
+
+/* Keep the complete hairstyle visible: anchor hero photo to its top edge */
+.cinematic-hero {
+  background-position: center top !important;
+  background-size: cover !important;
+}
+@media (max-width: 760px) {
+  .cinematic-hero {
+    background-position: 64% top !important;
+  }
+}
