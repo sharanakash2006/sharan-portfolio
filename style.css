@@ -3876,3 +3876,22 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
     min-height: 420px !important;
   }
 }
+
+
+/* Tighten the transition between the hero and About section */
+.cinematic-hero {
+  padding-bottom: 28px !important;
+  margin-bottom: 0 !important;
+}
+#about {
+  padding-top: 42px !important;
+  margin-top: 0 !important;
+  scroll-margin-top: 90px;
+}
+#about > :first-child {
+  margin-top: 0 !important;
+}
+@media (max-width: 760px) {
+  .cinematic-hero { padding-bottom: 22px !important; }
+  #about { padding-top: 30px !important; }
+}
