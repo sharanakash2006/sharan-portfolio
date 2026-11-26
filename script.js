@@ -2,10 +2,21 @@
 // Theme Toggle
 // ======================
 const themeToggle = document.getElementById("themeToggle");
+const savedTheme = localStorage.getItem("sharan-portfolio-theme");
+if (savedTheme === "light") document.body.classList.add("light-theme");
+function syncThemeButton() {
+  if (!themeToggle) return;
+  const isLight = document.body.classList.contains("light-theme");
+  themeToggle.textContent = isLight ? "🌙" : "☀️";
+  themeToggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+  themeToggle.setAttribute("title", isLight ? "Switch to dark theme" : "Switch to light theme");
+}
+syncThemeButton();
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    themeToggle.innerHTML = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    const isLight = document.body.classList.toggle("light-theme");
+    localStorage.setItem("sharan-portfolio-theme", isLight ? "light" : "dark");
+    syncThemeButton();
   });
 }
 
