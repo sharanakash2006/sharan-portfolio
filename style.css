@@ -4768,3 +4768,9 @@ body.welcome-open { overflow:hidden; }
 .welcome-screen .welcome-cube {
   display:none !important;
 }
+
+
+/* Remove the two rotating orbital circles from the welcome screen */
+.welcome-screen .welcome-ring {
+  display:none !important;
+}
