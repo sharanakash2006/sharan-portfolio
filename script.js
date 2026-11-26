@@ -61,6 +61,43 @@ if (heroVisual && portraitStage && !reduceMotion) {
   });
 }
 
+// 3D portrait puzzle: the photo assembles from floating image tiles on page load.
+(() => {
+  const frame = document.querySelector("#home .portrait-frame");
+  const img = frame?.querySelector(".portrait-img");
+  const layer = document.getElementById("portraitPuzzle");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!frame || !img || !layer || reduce) return;
+
+  const buildPuzzle = () => {
+    if (!img.complete || !img.naturalWidth) return;
+    layer.replaceChildren();
+    frame.classList.add("puzzle-assembling");
+    const count = 4;
+    for (let row = 0; row < count; row++) {
+      for (let col = 0; col < count; col++) {
+        const piece = document.createElement("span");
+        piece.className = "portrait-puzzle-piece";
+        piece.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+        piece.style.backgroundPosition = `${col * (100 / (count - 1))}% ${row * (100 / (count - 1))}%`;
+        piece.style.setProperty("--piece-x", `${(col % 2 ? 1 : -1) * (55 + row * 13)}px`);
+        piece.style.setProperty("--piece-y", `${(row % 2 ? 1 : -1) * (55 + col * 12)}px`);
+        piece.style.setProperty("--piece-rx", `${(row % 2 ? 1 : -1) * 48}deg`);
+        piece.style.setProperty("--piece-ry", `${(col % 2 ? 1 : -1) * 55}deg`);
+        piece.style.setProperty("--piece-rz", `${((row + col) % 2 ? 1 : -1) * 22}deg`);
+        piece.style.setProperty("--piece-delay", `${(row * count + col) * 48}ms`);
+        layer.appendChild(piece);
+      }
+    }
+    window.setTimeout(() => {
+      frame.classList.remove("puzzle-assembling");
+      layer.replaceChildren();
+    }, 2850);
+  };
+  if (img.complete) buildPuzzle();
+  else img.addEventListener("load", buildPuzzle, { once: true });
+})();
+
 // Subtle parallax for glass fragments
 document.querySelectorAll(".glass-shard").forEach((shard, index) => {
   shard.style.transition = "transform .35s ease-out";
