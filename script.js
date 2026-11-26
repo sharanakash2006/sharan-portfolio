@@ -234,11 +234,12 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
   }
 
   // Pause the decorative video when the tab is hidden to save battery.
-  const video = document.querySelector(".cinema-video");
+  const videos = [...document.querySelectorAll(".cinema-video, .welcome-live-video")];
   document.addEventListener("visibilitychange", () => {
-    if (!video) return;
-    if (document.hidden) video.pause();
-    else video.play().catch(() => {});
+    videos.forEach(video => {
+      if (document.hidden) video.pause();
+      else video.play().catch(() => {});
+    });
   });
 
   // Three.js: lightweight depth particle field, no external model downloads.
@@ -405,6 +406,8 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
   const screen = document.getElementById("welcomeScreen");
   const enter = document.getElementById("enterPortfolio");
   if (!screen || !enter) return;
+  const welcomeVideo = screen.querySelector(".welcome-live-video");
+  welcomeVideo?.play().catch(() => {});
   const openHome = () => {
     screen.classList.add("is-leaving");
     document.body.classList.remove("welcome-open");
