@@ -3895,3 +3895,52 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
   .cinematic-hero { padding-bottom: 22px !important; }
   #about { padding-top: 30px !important; }
 }
+
+
+/* FIX: prevent hero content from being hidden behind the cinematic layers */
+#home.cinematic-hero {
+  position: relative !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: hidden !important;
+  padding-top: 70px !important;
+  padding-bottom: 45px !important;
+  isolation: isolate !important;
+}
+#home.cinematic-hero > .cinematic-copy,
+#home.cinematic-hero > .hero-visual {
+  position: relative !important;
+  z-index: 5 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  animation: none !important;
+}
+#home.cinematic-hero > .cinematic-copy *,
+#home.cinematic-hero > .hero-visual * {
+  visibility: visible;
+}
+#home.cinematic-hero > .cinema-video {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+#home.cinematic-hero > .cinema-video-shade,
+#home.cinematic-hero > #threeScene,
+#home.cinematic-hero > .hero-grid,
+#home.cinematic-hero > .hero-noise,
+#home.cinematic-hero > .hero-orbit {
+  position: absolute !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+#home.cinematic-hero > .hero-bottom-note { z-index: 6 !important; }
+@media (max-width: 760px) {
+  #home.cinematic-hero {
+    padding-top: 42px !important;
+    padding-bottom: 30px !important;
+  }
+}
