@@ -4411,58 +4411,37 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
 }
 
 
-/* =========================================
-   3D PUZZLE PORTRAIT ASSEMBLY
-========================================= */
-#home .portrait-frame { isolation: isolate !important; }
-#home .portrait-frame .portrait-img {
-  position: relative !important;
-  z-index: 1 !important;
-  transition: opacity .35s ease !important;
+
+
+/* FINAL POLISH — responsive navigation, working project CTA and contact links */
+.projects-cta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 18px; margin: 32px auto 0; text-align: center;
 }
-#home .portrait-frame.puzzle-assembling .portrait-img { opacity: 0 !important; }
-#home .portrait-puzzle {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  perspective: 1100px;
-  pointer-events: none;
-  overflow: visible;
+.projects-cta p { color: #c9bfc3; margin: 0; font-size: 14px; }
+.projects-cta .project-btn {
+  display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
+  border-radius: 9px; border: 1px solid rgba(255,65,90,.48);
+  color: #fff; background: linear-gradient(135deg,rgba(255,45,72,.22),rgba(255,45,72,.06));
+  padding: 11px 17px; transition: transform .25s, box-shadow .25s, background .25s;
 }
-#home .portrait-puzzle-piece {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
-  background-repeat: no-repeat;
-  background-size: 400% 400%;
-  border: 1px solid rgba(255,255,255,.22);
-  box-shadow: 0 9px 18px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.12);
-  transform-style: preserve-3d;
-  opacity: 0;
-  animation: portraitPuzzleSnap .95s cubic-bezier(.16,.82,.22,1) forwards;
-  animation-delay: var(--piece-delay, 0ms);
-  will-change: transform, opacity;
+.projects-cta .project-btn:hover {
+  transform: translateY(-3px); background: linear-gradient(135deg,#e92749,#9d102b);
+  box-shadow: 0 8px 22px rgba(255,35,65,.24);
 }
-#home .portrait-puzzle-piece::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,.2), transparent 42%, rgba(0,0,0,.22));
-  pointer-events: none;
+#contact .info-box a { color: #ffdce2; text-decoration: none; overflow-wrap: anywhere; }
+#contact .info-box a:hover { color: #ff7181; text-decoration: underline; }
+#contact .contact-form button { cursor: pointer; }
+@media (max-width: 900px) {
+  header { padding: 13px 5% !important; gap: 12px; flex-wrap: wrap; }
+  header nav { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; gap: 12px 22px !important; }
+  header nav a { font-size: 13px !important; }
+  #themeToggle { width: 42px !important; height: 42px !important; }
 }
-@keyframes portraitPuzzleSnap {
-  0% {
-    opacity: 0;
-    transform: translate3d(var(--piece-x), var(--piece-y), 180px) rotateX(var(--piece-rx)) rotateY(var(--piece-ry)) rotateZ(var(--piece-rz)) scale(.72);
-    filter: brightness(1.7);
-  }
-  65% { opacity: 1; filter: brightness(1.12); }
-  100% { opacity: 1; transform: translate3d(0,0,0) rotateX(0) rotateY(0) rotateZ(0) scale(1); filter: brightness(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  #home .portrait-puzzle { display: none !important; }
-  #home .portrait-frame.puzzle-assembling .portrait-img { opacity: 1 !important; }
+@media (max-width: 520px) {
+  header { padding: 10px 4% !important; }
+  .logo { font-size: 23px !important; }
+  header nav { gap: 9px 15px !important; }
+  header nav a { font-size: 12px !important; }
+  .projects-cta { flex-direction: column; padding: 0 18px; }
 }
