@@ -3408,3 +3408,183 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   section:not(.cinematic-hero) { transition: none !important; transform: none !important; opacity: 1 !important; }
   .cinema-video { display: none; }
 }
+
+
+/* =========================================================
+   HERO: SHATTERED GLASS DEPTH + SECTION-TO-SECTION CINEMA
+   ========================================================= */
+.portrait-stage {
+  transform-style: preserve-3d !important;
+  perspective: 1200px;
+}
+.portrait-frame {
+  transform: translateZ(34px);
+  box-shadow: 0 25px 85px rgba(0,0,0,.58), 0 0 55px rgba(255,26,57,.20);
+}
+.portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 4;
+  pointer-events: none;
+  border: 1px solid rgba(255,95,115,.45);
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 86% 100%, 0 100%);
+  box-shadow: inset 0 0 24px rgba(255,25,55,.12);
+}
+.glass-shard {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  background: linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,38,63,.08) 35%, rgba(255,255,255,.015) 72%);
+  border: 1px solid rgba(255,225,230,.48);
+  box-shadow: 0 0 22px rgba(255,40,65,.16), inset 0 0 18px rgba(255,255,255,.09);
+  backdrop-filter: blur(1.5px);
+  opacity: .86;
+  animation: shardFloat 7s ease-in-out infinite alternate;
+}
+.glass-shard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,.55) 48%, transparent 62%);
+  transform: translateX(-120%);
+  animation: shardGlint 5.5s ease-in-out infinite;
+}
+.shard-one { clip-path: polygon(0 0,100% 12%,68% 100%,25% 76%); }
+.shard-two { clip-path: polygon(15% 0,100% 0,78% 100%,0 62%); animation-delay: -2s; }
+.shard-three { clip-path: polygon(0 15%,75% 0,100% 88%,22% 100%); animation-delay: -3.5s; }
+.shard-four { clip-path: polygon(30% 0,100% 22%,66% 100%,0 72%); animation-delay: -1s; }
+.shard-five { clip-path: polygon(0 0,100% 30%,55% 100%,18% 68%); animation-delay: -4s; }
+@keyframes shardFloat {
+  from { filter: brightness(.82); }
+  to { filter: brightness(1.28); }
+}
+@keyframes shardGlint {
+  0%, 55% { transform: translateX(-120%); }
+  78%, 100% { transform: translateX(120%); }
+}
+.glass-fracture {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  inset: -8%;
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+.glass-fracture polygon {
+  fill: url(#fractureFill);
+  stroke: rgba(255,225,230,.64);
+  stroke-width: .65;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 5px rgba(255,35,60,.35));
+  animation: fracturePulse 4.5s ease-in-out infinite alternate;
+}
+.glass-fracture polygon:nth-child(2n) { animation-delay: -1.7s; }
+.glass-fracture polygon:nth-child(3n) { animation-delay: -3s; }
+@keyframes fracturePulse {
+  from { opacity: .25; }
+  to { opacity: .78; }
+}
+.hero-visual:hover .glass-shard {
+  filter: brightness(1.55);
+}
+.hero-visual:hover .shard-one { transform: translate3d(-7px,-8px,32px) rotate(-5deg); }
+.hero-visual:hover .shard-two { transform: translate3d(8px,-5px,48px) rotate(4deg); }
+.hero-visual:hover .shard-three { transform: translate3d(-5px,8px,25px) rotate(3deg); }
+.hero-visual:hover .shard-four { transform: translate3d(9px,7px,42px) rotate(-4deg); }
+.hero-visual:hover .shard-five { transform: translate3d(-8px,-3px,55px) rotate(5deg); }
+
+/* Cinematic scroll transitions: blur/fade/slide, staggered inner elements */
+section:not(.cinematic-hero) {
+  position: relative;
+  isolation: isolate;
+  will-change: opacity, transform;
+}
+section:not(.cinematic-hero)::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,45,70,.34), transparent);
+  opacity: .7;
+  pointer-events: none;
+}
+section:not(.cinematic-hero) .section-title,
+section:not(.cinematic-hero) > h2 {
+  transition: opacity .75s ease, transform .75s cubic-bezier(.2,.7,.2,1), filter .75s ease;
+}
+section:not(.cinematic-hero):not(.revealed) .section-title,
+section:not(.cinematic-hero):not(.revealed) > h2 {
+  opacity: 0;
+  transform: translateY(26px);
+  filter: blur(7px);
+}
+section.revealed .section-title,
+section.revealed > h2 {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+section:not(.cinematic-hero) .card,
+section:not(.cinematic-hero) .about-box,
+section:not(.cinematic-hero) .skill-card,
+section:not(.cinematic-hero) .project-card,
+section:not(.cinematic-hero) .education-card,
+section:not(.cinematic-hero) .certificate-card,
+section:not(.cinematic-hero) .info-box {
+  transition:
+    opacity .65s ease,
+    transform .75s cubic-bezier(.2,.75,.2,1),
+    filter .75s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+section:not(.cinematic-hero):not(.revealed) .card,
+section:not(.cinematic-hero):not(.revealed) .about-box,
+section:not(.cinematic-hero):not(.revealed) .skill-card,
+section:not(.cinematic-hero):not(.revealed) .project-card,
+section:not(.cinematic-hero):not(.revealed) .education-card,
+section:not(.cinematic-hero):not(.revealed) .certificate-card,
+section:not(.cinematic-hero):not(.revealed) .info-box {
+  opacity: 0;
+  transform: translateY(30px) scale(.975);
+  filter: blur(5px);
+}
+section.revealed .card,
+section.revealed .about-box,
+section.revealed .skill-card,
+section.revealed .project-card,
+section.revealed .education-card,
+section.revealed .certificate-card,
+section.revealed .info-box {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+section.revealed .card:nth-child(2),
+section.revealed .about-box:nth-child(2),
+section.revealed .skill-card:nth-child(2),
+section.revealed .project-card:nth-child(2),
+section.revealed .education-card:nth-child(2),
+section.revealed .certificate-card:nth-child(2) { transition-delay: .08s; }
+section.revealed .card:nth-child(3),
+section.revealed .about-box:nth-child(3),
+section.revealed .skill-card:nth-child(3),
+section.revealed .project-card:nth-child(3),
+section.revealed .education-card:nth-child(3),
+section.revealed .certificate-card:nth-child(3) { transition-delay: .16s; }
+section.revealed .card:nth-child(4),
+section.revealed .project-card:nth-child(4),
+section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) {
+  .glass-shard, .glass-shard::after, .glass-fracture polygon { animation: none !important; }
+  section:not(.cinematic-hero), section:not(.cinematic-hero) * {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+@media (max-width: 760px) {
+  .glass-shard { opacity: .5; }
+  .glass-fracture { opacity: .58; }
+}
