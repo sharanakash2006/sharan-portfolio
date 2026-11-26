@@ -4140,3 +4140,85 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
   #skills .skill-card, #skills .skill-card:hover { transform: none !important; transition: none !important; }
   #skills .skill-card:hover i { animation: none !important; }
 }
+
+
+/* SKILLS 3D REDESIGN v2 — remove legacy blue/white icon circles */
+#skills .skills-container { perspective: 1400px !important; }
+#skills .skill-card {
+  min-height: 205px !important;
+  padding: 28px 22px 25px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  align-items: flex-start !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255,65,90,.28) !important;
+  background: linear-gradient(145deg,#24151c 0%,#151116 48%,#0b0b0e 100%) !important;
+  box-shadow: 0 18px 38px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.09) !important;
+  transform-style: preserve-3d !important;
+  transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease !important;
+}
+#skills .skill-card::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 145px !important; height: 145px !important;
+  top: -78px !important; right: -54px !important; left: auto !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255,48,77,.35) !important;
+  background: radial-gradient(circle,rgba(255,38,63,.24),rgba(255,38,63,.025) 68%,transparent 70%) !important;
+  box-shadow: 0 0 0 13px rgba(255,38,63,.035),0 0 0 27px rgba(255,38,63,.025) !important;
+  z-index: 0 !important;
+}
+#skills .skill-card::after {
+  content: "" !important;
+  position: absolute !important; inset: 0 !important;
+  width: auto !important; height: auto !important; margin: 0 !important;
+  border-radius: inherit !important;
+  background: linear-gradient(120deg,transparent 20%,rgba(255,255,255,.055) 45%,transparent 70%) !important;
+  opacity: .7 !important;
+  pointer-events: none !important;
+}
+#skills .skill-card i {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 2 !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 58px !important; height: 58px !important;
+  margin: 0 0 23px !important;
+  border-radius: 15px !important;
+  color: #ff405d !important;
+  background: linear-gradient(145deg,rgba(255,44,70,.2),rgba(255,44,70,.055)) !important;
+  border: 1px solid rgba(255,60,85,.3) !important;
+  box-shadow: 0 8px 24px rgba(255,25,55,.10), inset 0 1px rgba(255,255,255,.1) !important;
+  font-size: 27px !important;
+  transform: translateZ(38px) !important;
+}
+#skills .skill-card h3 {
+  z-index: 2 !important; margin: 0 0 8px !important;
+  font-size: 17px !important; color: #fff !important;
+  transform: translateZ(28px) !important;
+}
+#skills .skill-card p {
+  z-index: 2 !important; margin: 0 !important;
+  color: #b8aeb4 !important; font-size: 12px !important;
+  transform: translateZ(20px) !important;
+}
+#skills .skill-card:hover {
+  transform: perspective(950px) translateY(-12px) rotateX(5deg) rotateY(-4deg) !important;
+  border-color: rgba(255,55,85,.8) !important;
+  box-shadow: 0 30px 55px rgba(0,0,0,.6),0 0 35px rgba(255,30,60,.16),inset 0 1px rgba(255,255,255,.14) !important;
+}
+#skills .skill-card:hover i {
+  transform: translateZ(55px) scale(1.13) rotate(-5deg) !important;
+  box-shadow: 0 0 28px rgba(255,35,65,.28) !important;
+}
+@media(max-width:1050px) {
+ #skills .skills-container { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
+}
+@media(max-width:650px) {
+ #skills .skills-container { grid-template-columns: repeat(2,minmax(0,1fr)) !important; gap:13px !important; }
+ #skills .skill-card { min-height:180px !important; padding:20px 15px !important; }
+}
