@@ -4466,3 +4466,42 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
   #home .portrait-puzzle { display: none !important; }
   #home .portrait-frame.puzzle-assembling .portrait-img { opacity: 1 !important; }
 }
+
+
+/* INTERACTIVE 3D JIGSAW PORTRAIT — final override */
+#home .portrait-frame { perspective: 1400px !important; transform-style: preserve-3d !important; }
+#home .portrait-puzzle {
+  z-index: 5 !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-rows: repeat(4, 1fr) !important;
+  gap: 2px !important;
+  padding: 2px !important;
+  perspective: 1400px !important;
+}
+#home .portrait-puzzle-piece {
+  border: 1px solid rgba(255,255,255,.5) !important;
+  border-radius: 3px !important;
+  box-shadow: 0 12px 24px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,45,65,.22), inset 0 0 18px rgba(255,255,255,.08) !important;
+  background-size: 400% 400% !important;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,.35));
+  transform-origin: center center;
+}
+#home .portrait-puzzle-piece::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 2px;
+  box-shadow: inset 0 0 12px rgba(255,30,55,.16);
+}
+#home .portrait-puzzle-piece::after {
+  background: linear-gradient(135deg, rgba(255,255,255,.28), transparent 38%, rgba(0,0,0,.3)) !important;
+}
+#home .portrait-frame.puzzle-assembling .portrait-img { opacity: 0 !important; }
+#home .portrait-frame:not(.puzzle-assembling) .portrait-img { opacity: 1 !important; }
+#home .portrait-frame.puzzle-assembling { box-shadow: 0 28px 90px rgba(0,0,0,.65), 0 0 55px rgba(255,20,48,.35) !important; }
+@media (hover:hover) and (pointer:fine) {
+  #home .portrait-frame:hover .portrait-img { filter: saturate(1.08) contrast(1.1) !important; }
+  #home .portrait-frame:hover { box-shadow: 0 30px 95px rgba(0,0,0,.7), 0 0 60px rgba(255,20,48,.38) !important; }
+}
