@@ -3037,3 +3037,47 @@ footer {
   .project-card::before { display: none; }
   .project-card:hover { animation: none; }
 }
+
+
+/* SKILLS SHOWCASE — 3D floating technology tiles */
+.skills-container { perspective: 1300px; }
+.skill-card {
+  --skill-x: 0deg; --skill-y: 0deg; --skill-light: 0;
+  position: relative !important; overflow: hidden; isolation: isolate;
+  transform-style: preserve-3d;
+  transform: perspective(900px) rotateX(var(--skill-x)) rotateY(var(--skill-y));
+  will-change: transform;
+}
+.skill-card::before {
+  content: ""; position: absolute; width: 170px; height: 170px;
+  top: -95px; right: -90px; border: 1px solid rgba(255,38,63,.20);
+  border-radius: 50%;
+  box-shadow: 0 0 0 14px rgba(255,38,63,.025), 0 0 0 28px rgba(255,38,63,.018);
+  transition: transform .5s ease, border-color .5s ease; z-index: -1;
+}
+.skill-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  opacity: var(--skill-light);
+  background: radial-gradient(230px circle at var(--skill-glow-x,50%) var(--skill-glow-y,50%), rgba(255,38,63,.17), transparent 70%);
+  transition: opacity .25s ease;
+}
+.skill-card i {
+  display: inline-block; transform: translateZ(24px);
+  filter: drop-shadow(0 0 0 rgba(255,38,63,0));
+  transition: transform .35s ease, filter .35s ease;
+}
+.skill-card h3, .skill-card p { position: relative; z-index: 1; transform: translateZ(13px); }
+.skill-card:hover::before { transform: scale(1.22) translate(-8px,8px); border-color: rgba(255,38,63,.48); }
+.skill-card:hover i {
+  transform: translateZ(30px) translateY(-5px) scale(1.12);
+  filter: drop-shadow(0 0 12px rgba(255,38,63,.42));
+  animation: skillIconFloat 2.1s ease-in-out infinite;
+}
+@keyframes skillIconFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+.skill-card:hover::after { opacity: 1; }
+.skill-card:focus-within { outline: 1px solid rgba(255,38,63,.7); outline-offset: 3px; }
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .skill-card { transform: none !important; will-change: auto; }
+  .skill-card:hover i { animation: none; }
+  .skill-card::after { display: none; }
+}
