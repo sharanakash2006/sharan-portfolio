@@ -61,7 +61,7 @@ if (heroVisual && portraitStage && !reduceMotion) {
   });
 }
 
-// 3D jigsaw portrait: image tiles fly in with depth, then reveal the complete photo.
+// 3D portrait puzzle: the photo assembles from floating image tiles on page load.
 (() => {
   const frame = document.querySelector("#home .portrait-frame");
   const img = frame?.querySelector(".portrait-img");
@@ -69,12 +69,8 @@ if (heroVisual && portraitStage && !reduceMotion) {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!frame || !img || !layer || reduce) return;
 
-  let assembling = false;
-  let finishTimer;
   const buildPuzzle = () => {
-    if (!img.complete || !img.naturalWidth || assembling) return;
-    assembling = true;
-    window.clearTimeout(finishTimer);
+    if (!img.complete || !img.naturalWidth) return;
     layer.replaceChildren();
     frame.classList.add("puzzle-assembling");
     const count = 4;
@@ -82,34 +78,26 @@ if (heroVisual && portraitStage && !reduceMotion) {
       for (let col = 0; col < count; col++) {
         const piece = document.createElement("span");
         piece.className = "portrait-puzzle-piece";
-        piece.setAttribute("aria-hidden", "true");
         piece.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
-        piece.style.backgroundPosition = `${(col / (count - 1)) * 100}% ${(row / (count - 1)) * 100}%`;
-        const angle = ((row * 7 + col * 11) % 2 ? 1 : -1);
-        piece.style.setProperty("--piece-x", `${angle * (75 + (col % 3) * 22)}px`);
-        piece.style.setProperty("--piece-y", `${-angle * (65 + (row % 3) * 24)}px`);
-        piece.style.setProperty("--piece-rx", `${angle * (42 + col * 3)}deg`);
-        piece.style.setProperty("--piece-ry", `${-angle * (48 + row * 2)}deg`);
-        piece.style.setProperty("--piece-rz", `${angle * (14 + ((row + col) % 4) * 7)}deg`);
-        piece.style.setProperty("--piece-delay", `${(row * count + col) * 58}ms`);
+        piece.style.backgroundPosition = `${col * (100 / (count - 1))}% ${row * (100 / (count - 1))}%`;
+        piece.style.setProperty("--piece-x", `${(col % 2 ? 1 : -1) * (55 + row * 13)}px`);
+        piece.style.setProperty("--piece-y", `${(row % 2 ? 1 : -1) * (55 + col * 12)}px`);
+        piece.style.setProperty("--piece-rx", `${(row % 2 ? 1 : -1) * 48}deg`);
+        piece.style.setProperty("--piece-ry", `${(col % 2 ? 1 : -1) * 55}deg`);
+        piece.style.setProperty("--piece-rz", `${((row + col) % 2 ? 1 : -1) * 22}deg`);
+        piece.style.setProperty("--piece-delay", `${(row * count + col) * 48}ms`);
         layer.appendChild(piece);
       }
     }
-    finishTimer = window.setTimeout(() => {
+    window.setTimeout(() => {
       frame.classList.remove("puzzle-assembling");
       layer.replaceChildren();
-      assembling = false;
-    }, 3400);
+    }, 2850);
   };
-
   if (img.complete) buildPuzzle();
   else img.addEventListener("load", buildPuzzle, { once: true });
-  // Replay the jigsaw assembly when the visitor hovers over or taps the portrait.
-  frame.addEventListener("pointerenter", () => {
-    if (window.matchMedia("(hover:hover) and (pointer:fine)").matches) buildPuzzle();
-  });
-  frame.addEventListener("click", buildPuzzle);
 })();
+
 // Subtle parallax for glass fragments
 document.querySelectorAll(".glass-shard").forEach((shard, index) => {
   shard.style.transition = "transform .35s ease-out";
