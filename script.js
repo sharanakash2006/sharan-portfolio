@@ -332,3 +332,84 @@ if (contactForm) {
     if (renderer) renderer.dispose();
   }
 })();
+
+
+// =========================================================
+// SHATTERED GLASS OVERLAY + CINEMATIC SECTION REVEALS
+// =========================================================
+(() => {
+  const stage = document.getElementById("portraitStage");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Fine fracture lines around the portrait: lightweight SVG, no image assets.
+  if (stage && !stage.querySelector(".glass-fracture")) {
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("class", "glass-fracture");
+    svg.setAttribute("viewBox", "0 0 100 100");
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("aria-hidden", "true");
+    const defs = document.createElementNS(svgNS, "defs");
+    const gradient = document.createElementNS(svgNS, "linearGradient");
+    gradient.setAttribute("id", "fractureFill");
+    gradient.setAttribute("x1", "0"); gradient.setAttribute("y1", "0");
+    gradient.setAttribute("x2", "1"); gradient.setAttribute("y2", "1");
+    [["0%","rgba(255,255,255,.18)"],["55%","rgba(255,35,65,.055)"],["100%","rgba(255,255,255,.015)"]].forEach(([offset,color]) => {
+      const stop = document.createElementNS(svgNS, "stop");
+      stop.setAttribute("offset", offset); stop.setAttribute("stop-color", color);
+      gradient.appendChild(stop);
+    });
+    defs.appendChild(gradient); svg.appendChild(defs);
+    const shards = [
+      "4,5 29,0 23,27 10,35", "29,0 53,7 42,25 23,27",
+      "53,7 77,1 69,25 42,25", "77,1 98,13 83,34 69,25",
+      "0,39 10,35 23,27 19,55 4,68", "23,27 42,25 48,48 19,55",
+      "42,25 69,25 62,51 48,48", "69,25 83,34 96,53 62,51",
+      "4,68 19,55 32,79 13,96", "19,55 48,48 52,75 32,79",
+      "48,48 62,51 82,76 52,75", "62,51 96,53 98,89 82,76",
+      "13,96 32,79 52,75 44,100", "52,75 82,76 98,89 86,100"
+    ];
+    shards.forEach(points => {
+      const polygon = document.createElementNS(svgNS, "polygon");
+      polygon.setAttribute("points", points);
+      svg.appendChild(polygon);
+    });
+    stage.appendChild(svg);
+  }
+
+  // Give the portrait fragments a real parallax depth response.
+  if (stage && !reduce && window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    const fragments = [...stage.querySelectorAll(".glass-shard")];
+    stage.addEventListener("pointermove", event => {
+      const rect = stage.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width - .5;
+      const py = (event.clientY - rect.top) / rect.height - .5;
+      fragments.forEach((fragment, index) => {
+        const depth = 12 + index * 8;
+        fragment.style.transform =
+          `translate3d(${-px * depth}px,${-py * depth}px,${depth}px) rotate(${px * (index % 2 ? 5 : -5)}deg)`;
+      });
+    }, { passive: true });
+    stage.addEventListener("pointerleave", () => {
+      fragments.forEach(fragment => { fragment.style.transform = ""; });
+    });
+  }
+
+  // IntersectionObserver gives each section a calm cinematic entrance.
+  const animatedSections = [...document.querySelectorAll("section:not(.cinematic-hero)")];
+  if ("IntersectionObserver" in window && !reduce) {
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("revealed");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: .08, rootMargin: "0px 0px -7% 0px" });
+    animatedSections.forEach(section => {
+      section.classList.remove("revealed");
+      revealObserver.observe(section);
+    });
+  } else {
+    animatedSections.forEach(section => section.classList.add("revealed"));
+  }
+})();
