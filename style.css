@@ -3659,3 +3659,90 @@ section.revealed .certificate-card:nth-child(4) { transition-delay: .24s; }
   }
   .portrait-stage { height: min(112vw, 500px) !important; }
 }
+
+
+/* FINAL HERO LAYOUT CORRECTION: explicit two-column portrait + intro */
+.cinematic-hero {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .9fr) !important;
+  align-items: center !important;
+  justify-content: initial !important;
+  gap: clamp(24px, 4vw, 64px) !important;
+  padding: 125px clamp(32px, 7vw, 110px) 90px !important;
+  text-align: left !important;
+}
+.cinematic-hero > .cinematic-copy {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  width: 100% !important;
+  max-width: 680px !important;
+  min-width: 0 !important;
+  text-align: left !important;
+  z-index: 10 !important;
+}
+.cinematic-hero > .hero-visual {
+  display: block !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 620px !important;
+  margin: 0 auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+}
+.cinematic-hero .portrait-stage {
+  height: clamp(440px, 43vw, 610px) !important;
+  min-height: 440px !important;
+}
+.cinematic-hero .portrait-frame {
+  position: absolute !important;
+  inset: 0 4% !important;
+  display: block !important;
+  overflow: visible !important;
+  clip-path: none !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.cinematic-hero .portrait-img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  transform: none !important;
+}
+.cinematic-hero #threeScene,
+.cinematic-hero .cinema-video,
+.cinematic-hero .cinema-video-shade {
+  pointer-events: none !important;
+}
+.cinematic-hero #threeScene { z-index: 1 !important; }
+.cinematic-hero .cinema-video { z-index: 0 !important; }
+.cinematic-hero .cinema-video-shade { z-index: 1 !important; }
+@media (max-width: 760px) {
+  .cinematic-hero {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding: 115px 7% 85px !important;
+  }
+  .cinematic-hero > .cinematic-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    text-align: center !important;
+  }
+  .cinematic-hero > .hero-visual {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    max-width: 500px !important;
+  }
+  .cinematic-hero .portrait-stage {
+    height: min(112vw, 500px) !important;
+    min-height: 0 !important;
+  }
+}
