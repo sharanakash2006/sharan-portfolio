@@ -3081,3 +3081,107 @@ footer {
   .skill-card:hover i { animation: none; }
   .skill-card::after { display: none; }
 }
+
+
+/* EDUCATION + CERTIFICATES — cinematic achievement showcase */
+#education .section-title p,
+#certificates .section-title p { color: #b4a8ad !important; }
+.education-container { perspective: 1200px; }
+.education-container::before {
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, #ff263f 12%, rgba(255,38,63,.55) 78%, transparent 100%);
+  box-shadow: 0 0 16px rgba(255,38,63,.32);
+}
+.education-card {
+  overflow: hidden;
+  transform: translateX(0);
+  transition: transform .45s ease, border-color .45s ease, box-shadow .45s ease;
+}
+.education-card::before {
+  content: "ACADEMIC RECORD";
+  position: absolute; top: 22px; right: 25px;
+  color: rgba(255,255,255,.26);
+  font-size: 9px; letter-spacing: 2px; font-weight: 800;
+}
+.education-card::after {
+  content: "";
+  position: absolute; width: 260px; height: 260px;
+  right: -135px; bottom: -185px;
+  border: 1px solid rgba(255,38,63,.18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 18px rgba(255,38,63,.025), 0 0 0 38px rgba(255,38,63,.018);
+  pointer-events: none;
+}
+.education-card:hover {
+  transform: translateY(-5px) translateX(5px);
+  border-color: rgba(255,38,63,.62) !important;
+  box-shadow: 0 28px 65px rgba(0,0,0,.38), 0 0 30px rgba(255,38,63,.08);
+}
+.edu-icon { transition: transform .35s ease, box-shadow .35s ease; }
+.education-card:hover .edu-icon {
+  transform: scale(1.1) rotate(-8deg);
+  box-shadow: 0 0 28px rgba(255,38,63,.55);
+}
+.edu-content h3 { letter-spacing: -.35px; }
+.edu-content h4 { letter-spacing: .2px; }
+.edu-content p { position: relative; z-index: 1; }
+.cgpa {
+  position: relative; z-index: 1;
+  box-shadow: 0 0 20px rgba(255,38,63,.08);
+  letter-spacing: .35px;
+}
+.certificate-container { perspective: 1300px; }
+.certificate-card {
+  --cert-x: 0deg; --cert-y: 0deg; --cert-glow: 0;
+  position: relative !important;
+  overflow: hidden;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transform: perspective(900px) rotateX(var(--cert-x)) rotateY(var(--cert-y));
+  will-change: transform;
+}
+.certificate-card::before {
+  content: "";
+  position: absolute; inset: 0;
+  opacity: var(--cert-glow);
+  pointer-events: none;
+  background: radial-gradient(220px circle at var(--cert-glow-x,50%) var(--cert-glow-y,50%), rgba(255,38,63,.18), transparent 72%);
+}
+.certificate-card::after {
+  content: "";
+  position: absolute; top: -55px; right: -55px;
+  width: 120px; height: 120px;
+  border: 1px solid rgba(255,38,63,.20);
+  border-radius: 50%;
+  box-shadow: 0 0 0 12px rgba(255,38,63,.025), 0 0 0 24px rgba(255,38,63,.018);
+  transition: transform .45s ease, border-color .45s ease;
+  z-index: -1;
+}
+.certificate-card i {
+  position: relative; z-index: 1;
+  transform: translateZ(24px);
+  transition: transform .35s ease, filter .35s ease;
+}
+.certificate-card h3, .certificate-card p {
+  position: relative; z-index: 1; transform: translateZ(12px);
+}
+.certificate-card:hover {
+  transform: perspective(900px) rotateX(var(--cert-x)) rotateY(var(--cert-y)) translateY(-8px);
+  border-color: rgba(255,38,63,.72) !important;
+  box-shadow: 0 24px 50px rgba(0,0,0,.36), 0 0 26px rgba(255,38,63,.11);
+}
+.certificate-card:hover::after { transform: scale(1.25) translate(-8px,8px); border-color: rgba(255,38,63,.48); }
+.certificate-card:hover i {
+  transform: translateZ(30px) scale(1.13) rotate(-5deg);
+  filter: drop-shadow(0 0 12px rgba(255,38,63,.45));
+}
+.certificate-card h3 { transition: color .3s ease; }
+.certificate-card:hover h3 { color: #ff6578 !important; }
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .certificate-card { transform: none !important; will-change: auto; }
+  .education-card:hover { transform: none; }
+}
+@media (max-width: 700px) {
+  .education-card::before { display: none; }
+  .education-card::after { width: 170px; height: 170px; right: -100px; bottom: -120px; }
+}
