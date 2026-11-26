@@ -7,7 +7,7 @@ if (savedTheme === "light") document.body.classList.add("light-theme");
 function syncThemeButton() {
   if (!themeToggle) return;
   const isLight = document.body.classList.contains("light-theme");
-  themeToggle.textContent = isLight ? "🌙" : "☀️";
+  themeToggle.innerHTML = `<span class="theme-icon">${isLight ? "🌙" : "☀️"}</span><span class="theme-label">Theme</span>`;
   themeToggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
   themeToggle.setAttribute("title", isLight ? "Switch to dark theme" : "Switch to light theme");
 }
