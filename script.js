@@ -149,3 +149,42 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
     });
   });
 }
+
+
+// ======================
+// Interactive Certificate Cards
+// ======================
+const certificateCards = document.querySelectorAll(".certificate-card");
+
+if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  certificateCards.forEach((card) => {
+    let certificateFrame = null;
+
+    card.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") return;
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * 8;
+      const rotateX = (0.5 - y) * 7;
+
+      if (certificateFrame) cancelAnimationFrame(certificateFrame);
+      certificateFrame = requestAnimationFrame(() => {
+        card.style.setProperty("--cert-x", `${rotateX}deg`);
+        card.style.setProperty("--cert-y", `${rotateY}deg`);
+        card.style.setProperty("--cert-glow-x", `${x * 100}%`);
+        card.style.setProperty("--cert-glow-y", `${y * 100}%`);
+        card.style.setProperty("--cert-glow", "1");
+      });
+    });
+
+    card.addEventListener("pointerleave", () => {
+      if (certificateFrame) cancelAnimationFrame(certificateFrame);
+      card.style.setProperty("--cert-x", "0deg");
+      card.style.setProperty("--cert-y", "0deg");
+      card.style.setProperty("--cert-glow-x", "50%");
+      card.style.setProperty("--cert-glow-y", "50%");
+      card.style.setProperty("--cert-glow", "0");
+    });
+  });
+}
