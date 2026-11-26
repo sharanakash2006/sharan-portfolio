@@ -73,3 +73,43 @@ document.querySelectorAll(".glass-shard").forEach((shard, index) => {
     portraitStage.addEventListener("pointerleave", () => { shard.style.translate = "0 0"; });
   }
 });
+
+
+// ======================
+// Interactive 3D Project Cards
+// ======================
+const projectCards = document.querySelectorAll(".project-card");
+
+if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  projectCards.forEach((card) => {
+    let frame = null;
+
+    card.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") return;
+
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * 10;
+      const rotateX = (0.5 - y) * 8;
+
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        card.style.setProperty("--tilt-x", `${rotateX}deg`);
+        card.style.setProperty("--tilt-y", `${rotateY}deg`);
+        card.style.setProperty("--glow-x", `${x * 100}%`);
+        card.style.setProperty("--glow-y", `${y * 100}%`);
+        card.style.setProperty("--card-glow", "1");
+      });
+    });
+
+    card.addEventListener("pointerleave", () => {
+      if (frame) cancelAnimationFrame(frame);
+      card.style.setProperty("--tilt-x", "0deg");
+      card.style.setProperty("--tilt-y", "0deg");
+      card.style.setProperty("--glow-x", "50%");
+      card.style.setProperty("--glow-y", "50%");
+      card.style.setProperty("--card-glow", "0");
+    });
+  });
+}
