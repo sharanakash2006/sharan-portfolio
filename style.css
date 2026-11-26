@@ -3185,3 +3185,59 @@ footer {
   .education-card::before { display: none; }
   .education-card::after { width: 170px; height: 170px; right: -100px; bottom: -120px; }
 }
+
+
+/* FINAL CONTACT EXPERIENCE — cinematic CTA and social presence */
+#contact {
+  overflow: hidden;
+  background: radial-gradient(ellipse at 8% 50%, rgba(255,38,63,.13), transparent 40%), radial-gradient(ellipse at 95% 5%, rgba(130,0,20,.12), transparent 35%), #09090b !important;
+}
+#contact .section-title h2 { letter-spacing: -2px; }
+#contact .section-title p { max-width: 540px; margin: 0 auto !important; }
+.contact-container { perspective: 1200px; }
+.contact-info, .contact-form {
+  position: relative; overflow: hidden; isolation: isolate;
+  border-color: rgba(255,255,255,.12) !important;
+  transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease;
+}
+.contact-info::before, .contact-form::before {
+  content: ""; position: absolute; top: -90px; right: -90px;
+  width: 210px; height: 210px; border-radius: 50%;
+  border: 1px solid rgba(255,38,63,.19);
+  box-shadow: 0 0 0 18px rgba(255,38,63,.025), 0 0 0 38px rgba(255,38,63,.018);
+  z-index: -1; pointer-events: none;
+}
+.contact-info:hover, .contact-form:hover {
+  border-color: rgba(255,38,63,.4) !important;
+  box-shadow: 0 25px 65px rgba(0,0,0,.38), 0 0 30px rgba(255,38,63,.06);
+}
+.contact-info .info-box { transition: transform .3s ease; }
+.contact-info .info-box:hover { transform: translateX(5px); }
+.contact-info .info-box > i { transition: transform .3s ease, color .3s ease, background .3s ease, box-shadow .3s ease; }
+.contact-info .info-box:hover > i {
+  transform: translateY(-3px) rotate(-5deg); color: #fff !important;
+  background: var(--cinema-red) !important; box-shadow: 0 8px 22px rgba(255,38,63,.24);
+}
+.contact-form form { position: relative; z-index: 1; }
+.contact-form input, .contact-form textarea { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease; }
+.contact-form input:focus, .contact-form textarea:focus { transform: translateY(-2px); background: #100c0e !important; }
+.contact-form button { position: relative; overflow: hidden; isolation: isolate; box-shadow: 0 8px 25px rgba(255,38,63,.16); }
+.contact-form button::before {
+  content: ""; position: absolute; top: -60%; left: -35%; width: 25%; height: 220%;
+  transform: rotate(25deg); background: rgba(255,255,255,.22); transition: left .55s ease; z-index: -1;
+}
+.contact-form button:hover::before { left: 120%; }
+.footer-content h2 { letter-spacing: -1px; text-shadow: 0 0 28px rgba(255,38,63,.18); }
+.footer-social a { position: relative; overflow: hidden; transition: transform .3s ease, background .3s ease, box-shadow .3s ease; }
+.footer-social a:hover { box-shadow: 0 10px 25px rgba(255,38,63,.24); }
+.footer-social a i { transition: transform .3s ease; }
+.footer-social a:hover i { transform: scale(1.16) rotate(-7deg); }
+.footer-content > p:last-child {
+  padding-top: 22px; margin-top: 25px !important;
+  border-top: 1px solid rgba(255,255,255,.08); letter-spacing: .4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-info, .contact-form, .contact-info .info-box, .contact-form input,
+  .contact-form textarea, .footer-social a, .footer-social a i { transition: none !important; }
+  .contact-info .info-box:hover { transform: none; }
+}
