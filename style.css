@@ -5245,3 +5245,120 @@ body #contact .contact-form button{justify-self:stretch!important;border-radius:
  .welcome-screen .welcome-portrait-bg{object-position:66% center!important;opacity:.48!important}
  .welcome-screen .welcome-backdrop{background:linear-gradient(90deg,rgba(3,3,5,.94),rgba(3,3,5,.62)),linear-gradient(0deg,rgba(3,3,5,.65),transparent)!important}
 }
+
+
+/* ULTRA CINEMATIC GAMING INTRO — WELCOME SCREEN ONLY */
+.welcome-screen{
+  --welcome-pointer-x:50%;
+  --welcome-pointer-y:50%;
+  background:#030305!important;
+  isolation:isolate!important;
+}
+.welcome-screen::before,.welcome-screen::after{
+  z-index:1!important;pointer-events:none;
+  border-color:rgba(255,42,78,.2)!important;
+  box-shadow:0 0 55px rgba(255,20,58,.07),inset 0 0 55px rgba(255,20,58,.035);
+}
+.welcome-screen::before{animation:welcomeOrbit 32s linear infinite!important}
+.welcome-screen::after{animation:welcomeOrbit 46s linear infinite reverse!important}
+.welcome-screen .welcome-backdrop{
+  z-index:1!important;
+  background:
+   radial-gradient(ellipse at var(--welcome-pointer-x) var(--welcome-pointer-y),rgba(255,34,74,.17),transparent 28%),
+   linear-gradient(90deg,rgba(2,2,4,.98) 0%,rgba(2,2,4,.9) 29%,rgba(2,2,4,.42) 55%,rgba(2,2,4,.08) 100%),
+   linear-gradient(0deg,rgba(2,2,4,.48),transparent 38%,rgba(2,2,4,.12))!important;
+  transition:background .18s ease;
+}
+.welcome-screen .welcome-portrait-bg{
+  z-index:0!important;object-position:72% 34%!important;
+  opacity:.96!important;filter:saturate(1.02) contrast(1.07)!important;
+}
+.welcome-particle-canvas{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  z-index:2!important;pointer-events:none!important;opacity:.92;
+}
+.welcome-screen .welcome-visual{
+  z-index:3!important;left:70%!important;top:51%!important;
+  width:min(78vw,980px)!important;height:min(88vh,900px)!important;
+  opacity:.78!important;pointer-events:none!important;
+  filter:drop-shadow(0 0 42px rgba(255,22,58,.25))!important;
+  animation:welcomeSceneFloat 7s ease-in-out infinite!important;
+}
+.welcome-screen .welcome-ring{
+  border-width:1px!important;
+  box-shadow:0 0 28px rgba(255,30,65,.12),inset 0 0 24px rgba(255,30,65,.06);
+}
+.welcome-screen .welcome-ring-a{border-color:rgba(255,64,96,.46)!important}
+.welcome-screen .welcome-ring-b{border-color:rgba(255,255,255,.2)!important}
+.welcome-screen .welcome-ring-c{border-color:rgba(255,64,96,.34)!important}
+.welcome-screen .welcome-halo-a{background:rgba(255,14,58,.2)!important;filter:blur(48px)!important}
+.welcome-screen .welcome-halo-b{background:rgba(255,55,90,.17)!important;filter:blur(34px)!important}
+.welcome-screen .welcome-data-one{display:none!important}
+.welcome-screen .welcome-data-two{right:2%!important;bottom:10%!important;top:auto!important;transform:rotate(5deg)!important;opacity:.78!important}
+.welcome-screen .welcome-spark{z-index:3!important}
+.welcome-screen .welcome-content{
+  z-index:5!important;position:relative!important;
+  transform-style:preserve-3d;
+  filter:drop-shadow(0 10px 35px rgba(0,0,0,.35));
+}
+.welcome-screen .welcome-monogram{
+  position:relative;display:inline-flex!important;
+  text-shadow:0 0 18px rgba(255,40,80,.35),0 0 48px rgba(255,20,60,.22)!important;
+}
+.welcome-screen .welcome-kicker span{
+  box-shadow:0 0 8px #ff3156,0 0 22px rgba(255,49,86,.85)!important;
+}
+.welcome-screen #welcomeTitle{
+  text-shadow:0 0 22px rgba(255,255,255,.08),0 12px 45px rgba(0,0,0,.6)!important;
+}
+.welcome-screen #welcomeTitle span{
+  background:linear-gradient(100deg,#ff1748 0%,#ff496b 36%,#ff9aaa 52%,#fa234d 72%,#b90d31 100%)!important;
+  background-size:220% auto!important;
+  background-clip:text!important;-webkit-background-clip:text!important;
+  animation:welcomeTitleEnergy 6s linear infinite!important;
+  filter:drop-shadow(0 0 22px rgba(255,24,64,.28));
+}
+.welcome-screen .welcome-intro{color:rgba(255,242,246,.82)!important}
+.welcome-screen .welcome-enter{
+  position:relative!important;isolation:isolate;
+  box-shadow:0 0 0 1px rgba(255,105,130,.38),0 0 28px rgba(255,20,60,.38),0 14px 42px rgba(0,0,0,.42)!important;
+  transition:transform .25s ease,box-shadow .25s ease!important;
+}
+.welcome-screen .welcome-enter:hover{
+  transform:translateY(-4px) scale(1.035)!important;
+  box-shadow:0 0 0 1px rgba(255,145,160,.8),0 0 48px rgba(255,20,60,.62),0 18px 48px rgba(0,0,0,.5)!important;
+}
+.welcome-resume{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease!important}
+.welcome-resume:hover{box-shadow:0 0 28px rgba(255,30,70,.2)!important}
+.welcome-hud{
+  position:absolute;z-index:4;top:28px;right:34px;
+  display:flex;align-items:center;gap:18px;
+  color:rgba(255,220,228,.58);font:700 8px Poppins,sans-serif;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:11px 14px;border:1px solid rgba(255,77,107,.22);
+  background:linear-gradient(110deg,rgba(20,5,12,.72),rgba(8,6,10,.3));
+  backdrop-filter:blur(14px);box-shadow:0 10px 35px rgba(0,0,0,.2);
+}
+.welcome-hud::before,.welcome-hud::after{
+  content:"";position:absolute;width:9px;height:9px;border-color:#ff4567;border-style:solid;
+}
+.welcome-hud::before{top:-1px;left:-1px;border-width:1px 0 0 1px}
+.welcome-hud::after{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
+.welcome-hud .hud-live{display:flex;align-items:center;gap:7px;color:#ff8da1}
+.welcome-hud .hud-live i{width:6px;height:6px;border-radius:50%;background:#ff3156;box-shadow:0 0 12px #ff3156;animation:welcomeHudPulse 1.4s ease-in-out infinite}
+.welcome-hud .hud-coordinates{color:rgba(255,255,255,.38)}
+.welcome-screen::marker{display:none}
+@keyframes welcomeTitleEnergy{0%{background-position:0% center}100%{background-position:220% center}}
+@keyframes welcomeHudPulse{0%,100%{opacity:.45;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+@media(max-width:760px){
+ .welcome-hud{top:16px;right:16px;left:16px;justify-content:space-between;gap:8px;font-size:7px;letter-spacing:1px;padding:9px 10px}
+ .welcome-hud .hud-coordinates{display:none}
+ .welcome-screen .welcome-portrait-bg{object-position:68% center!important;opacity:.58!important}
+ .welcome-screen .welcome-visual{left:75%!important;top:48%!important;width:120vw!important;height:80vh!important;opacity:.42!important}
+ .welcome-screen .welcome-data-two{display:none!important}
+ .welcome-particle-canvas{opacity:.6}
+}
+@media(prefers-reduced-motion:reduce){
+ .welcome-screen .welcome-ring,.welcome-screen .welcome-visual,.welcome-screen #welcomeTitle span,
+ .welcome-hud .hud-live i{animation:none!important}
+}
