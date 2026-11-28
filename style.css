@@ -5596,3 +5596,22 @@ body #contact .contact-form button{justify-self:stretch!important;border-radius:
 .welcome-screen #welcomeTitle{font-size:clamp(42px,6.1vw,88px)!important;line-height:.98!important}
 .welcome-screen .welcome-hud{z-index:7!important}
 @media(max-width:760px){.welcome-screen .welcome-portrait-bg{width:100%!important;object-position:66% center!important;opacity:.55!important}.welcome-screen .welcome-backdrop{background:linear-gradient(90deg,rgba(2,2,4,.88),rgba(2,2,4,.5)),linear-gradient(0deg,rgba(2,2,4,.45),transparent)!important}.welcome-screen .welcome-content{width:100%!important;max-width:100%!important}}
+
+/* SIGNATURE SA BRAND IDENTITY — welcome, navbar and loader */
+.sa-emblem{display:flex!important;align-items:center!important;gap:13px!important;width:max-content!important;margin-bottom:34px!important;text-shadow:none!important}
+.sa-emblem .sa-mark{position:relative;display:inline-flex;align-items:center;justify-content:center;width:66px;height:66px;border:1px solid rgba(255,65,94,.7);border-radius:17px 5px 17px 5px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,35,75,.06) 48%,rgba(0,0,0,.7));box-shadow:inset 0 1px rgba(255,255,255,.22),0 0 28px rgba(255,30,65,.22),0 10px 30px rgba(0,0,0,.35);font-family:Georgia,serif;font-size:38px;font-weight:700;letter-spacing:-8px;padding-right:7px;color:#fff}
+.sa-emblem .sa-mark:before{content:"";position:absolute;inset:5px;border:1px solid rgba(255,255,255,.12);border-radius:12px 3px 12px 3px;pointer-events:none}
+.sa-emblem .sa-a{color:#ff365b;text-shadow:0 0 18px rgba(255,45,85,.8)}
+.sa-emblem>i{display:none}
+.sa-emblem>b{font:700 10px/1.5 Arial,sans-serif;letter-spacing:3px;color:#f4dce1;opacity:.9}
+.sa-brand{display:flex!important;align-items:center!important;gap:10px!important;text-decoration:none!important;white-space:nowrap!important}
+.sa-brand-mark{position:relative;display:flex;align-items:center;justify-content:center;width:39px;height:39px;border:1px solid rgba(255,55,88,.75);border-radius:11px 3px 11px 3px;background:linear-gradient(145deg,#292027,#090709);box-shadow:0 0 18px rgba(255,35,70,.2),inset 0 1px rgba(255,255,255,.2);font:700 22px Georgia,serif;color:#fff;letter-spacing:-5px;padding-right:5px}
+.sa-brand-mark span{color:#ff365b}
+.sa-brand-mark i{position:absolute;width:5px;height:5px;border-radius:50%;background:#ff365b;right:5px;bottom:5px;box-shadow:0 0 9px #ff365b}
+.sa-brand-name{display:flex;flex-direction:column;gap:2px;font:800 12px/1 Arial,sans-serif;letter-spacing:1.7px;color:#fff}
+.sa-brand-name b{color:#ff4968}
+.sa-brand-name small{font:600 7px/1.2 Arial,sans-serif;letter-spacing:2px;color:#a98c93;margin-top:3px}
+.sa-loader-mark{position:relative!important;display:grid!important;place-items:center!important;width:76px;height:76px;margin:0 auto 18px!important;border:1px solid rgba(255,55,88,.8);border-radius:19px 5px 19px 5px;background:linear-gradient(145deg,#21151a,#050505)!important;box-shadow:0 0 35px rgba(255,35,70,.28),inset 0 1px rgba(255,255,255,.2);font:700 36px Georgia,serif!important;letter-spacing:-7px!important;color:white!important}
+.sa-loader-mark>span>span{color:#ff365b}
+.sa-loader-mark>i{position:absolute;right:10px;bottom:10px;width:7px;height:7px;border-radius:50%;background:#ff365b;box-shadow:0 0 12px #ff365b}
+@media(max-width:760px){.sa-emblem{margin-bottom:24px!important}.sa-emblem .sa-mark{width:56px;height:56px;font-size:32px}.sa-emblem>b{font-size:8px;letter-spacing:2px}.sa-brand-name{font-size:10px}}
