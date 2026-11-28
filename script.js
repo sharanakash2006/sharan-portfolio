@@ -550,3 +550,112 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
     window.location.href = `mailto:sharanakash2006@gmail.com?subject=${subject}&body=${body}`;
   });
 })();
+
+
+// ===== WELCOME SCREEN: live particle field + interactive gaming parallax =====
+(() => {
+  const screen = document.getElementById("welcomeScreen");
+  const canvas = document.getElementById("welcomeParticles");
+  if (!screen || !canvas) return;
+  const ctx = canvas.getContext("2d", { alpha: true });
+  if (!ctx) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  let width = 0, height = 0, dpr = 1, frame = 0;
+  let particles = [];
+  const pointer = { x: -1000, y: -1000, active: false };
+  const random = (min, max) => Math.random() * (max - min) + min;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.min(115, Math.max(38, Math.round(width * height / 15500)));
+    particles = Array.from({ length: count }, () => ({
+      x: random(0, width), y: random(0, height),
+      vx: random(-.22, .22), vy: random(-.28, .16),
+      radius: random(.65, 2.1), alpha: random(.2, .8),
+      phase: random(0, Math.PI * 2), speed: random(.008, .025)
+    }));
+  }
+
+  function draw() {
+    if (!screen.isConnected || screen.classList.contains("is-leaving")) {
+      cancelAnimationFrame(frame);
+      return;
+    }
+    ctx.clearRect(0, 0, width, height);
+    const time = performance.now() * .001;
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -8) p.x = width + 8;
+      if (p.x > width + 8) p.x = -8;
+      if (p.y < -8) p.y = height + 8;
+      if (p.y > height + 8) p.y = -8;
+
+      if (pointer.active && !reduce) {
+        const dx = p.x - pointer.x, dy = p.y - pointer.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < 145 && distance > 1) {
+          const force = (145 - distance) / 145 * .012;
+          p.x += dx * force;
+          p.y += dy * force;
+        }
+      }
+      const pulse = .58 + Math.sin(time * 1.8 + p.phase) * .32;
+      const opacity = p.alpha * pulse;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,65,96,${opacity})`;
+      ctx.shadowBlur = p.radius > 1.5 ? 13 : 5;
+      ctx.shadowColor = "rgba(255,35,75,.85)";
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const other = particles[j];
+        const dx = p.x - other.x, dy = p.y - other.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < 105) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255,65,96,${(1 - distance / 105) * .12})`;
+          ctx.lineWidth = .55;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.shadowBlur = 0;
+    frame = requestAnimationFrame(draw);
+  }
+
+  if (!reduce) {
+    resize();
+    draw();
+    window.addEventListener("resize", resize, { passive: true });
+    if (finePointer) {
+      screen.addEventListener("pointermove", event => {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+        pointer.active = true;
+        screen.style.setProperty("--welcome-pointer-x", `${event.clientX}px`);
+        screen.style.setProperty("--welcome-pointer-y", `${event.clientY}px`);
+        const rect = screen.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width - .5;
+        const py = (event.clientY - rect.top) / rect.height - .5;
+        const visual = screen.querySelector(".welcome-visual");
+        if (visual) visual.style.transform = `translateY(calc(-50% + ${py * -9}px)) translateX(${px * 8}px) rotateY(${px * 3}deg)`;
+      }, { passive: true });
+      screen.addEventListener("pointerleave", () => {
+        pointer.active = false;
+        const visual = screen.querySelector(".welcome-visual");
+        if (visual) visual.style.transform = "translateY(-50%)";
+      });
+    }
+  }
+})();
