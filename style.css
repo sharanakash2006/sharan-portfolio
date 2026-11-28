@@ -4915,3 +4915,15 @@ body.light-theme .welcome-screen * { color:inherit; }
 .form-note{font-size:11px;color:#aaa;line-height:1.5;margin-top:10px}
 @media(max-width:760px){.journey-item{grid-template-columns:1fr;gap:8px;padding:20px}.github-profile-strip{flex-wrap:wrap;padding:18px}.github-stats{width:100%;justify-content:flex-start;padding-left:90px}.github-content-grid,.profile-link-grid{grid-template-columns:1fr}.assistant-shell{padding:15px}.github-panel{padding:17px}}
 @media(prefers-reduced-motion:reduce){.profile-link-card,.skill-filter{transition:none}}
+
+
+/* Expandable project case studies */
+.case-study-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.case-study-card{padding:24px;border-radius:18px;border:1px solid rgba(255,70,100,.2);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,40,75,.035));box-shadow:0 14px 38px rgba(0,0,0,.16)}
+.case-study-number{font-size:10px;letter-spacing:1.5px;font-weight:800;color:#ff7188}
+.case-study-card h3{color:#fff;margin:12px 0 8px;font-size:19px}
+.case-study-card>p{color:#c0c0ca;font-size:13px;line-height:1.7;min-height:44px}
+.case-study-card details{margin-top:16px;border-top:1px solid rgba(255,255,255,.1);padding-top:13px}
+.case-study-card summary{cursor:pointer;color:#ff8da0;font-size:13px;font-weight:700}
+.case-study-card ul{padding-left:20px;color:#c7c7d0;font-size:12px;line-height:1.9}
+@media(max-width:760px){.case-study-grid{grid-template-columns:1fr}}
