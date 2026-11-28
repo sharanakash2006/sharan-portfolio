@@ -535,19 +535,65 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
   document.querySelectorAll("[data-assistant-question]").forEach(button => button.addEventListener("click", () => ask(button.dataset.assistantQuestion || "")));
 })();
 
-// ===== Contact form: prepare an email in the visitor's email app =====
+// ===== Contact form: send enquiries directly to the portfolio owner's inbox =====
 (() => {
   const form = document.getElementById("contactForm");
   if (!form) return;
-  form.addEventListener("submit", event => {
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  let status = form.querySelector(".form-status");
+  if (!status) {
+    status = document.createElement("p");
+    status.className = "form-status";
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
+    form.appendChild(status);
+  }
+
+  form.addEventListener("submit", async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
+
     const data = new FormData(form);
-    const subject = encodeURIComponent(`Portfolio enquiry from ${data.get("name") || "Website visitor"}`);
-    const body = encodeURIComponent(
-      `Name: ${data.get("name") || ""}\nEmail: ${data.get("email") || ""}\nCompany: ${data.get("company") || "Not provided"}\n\nMessage:\n${data.get("message") || ""}`
-    );
-    window.location.href = `mailto:sharanakash2006@gmail.com?subject=${subject}&body=${body}`;
+    const payload = {
+      name: data.get("name"),
+      email: data.get("email"),
+      company: data.get("company") || "Not provided",
+      message: data.get("message"),
+      _subject: `New portfolio enquiry from ${data.get("name") || "Website visitor"}`,
+      _template: "table",
+      _captcha: "false"
+    };
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    }
+    status.textContent = "Sending your message securely...";
+    status.classList.remove("form-success", "form-error");
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/sharanakash2006@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+      if (!response.ok || result.success !== "true" && result.success !== true) {
+        throw new Error(result.message || "The message could not be sent. Please try again.");
+      }
+      form.reset();
+      status.textContent = "Message sent successfully! Thank you for contacting me.";
+      status.classList.add("form-success");
+    } catch (error) {
+      status.textContent = "Sorry, your message could not be sent. Please email sharanakash2006@gmail.com directly.";
+      status.classList.add("form-error");
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+      }
+    }
   });
 })();
 
