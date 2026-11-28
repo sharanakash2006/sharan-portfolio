@@ -4927,3 +4927,13 @@ body.light-theme .welcome-screen * { color:inherit; }
 .case-study-card summary{cursor:pointer;color:#ff8da0;font-size:13px;font-weight:700}
 .case-study-card ul{padding-left:20px;color:#c7c7d0;font-size:12px;line-height:1.9}
 @media(max-width:760px){.case-study-grid{grid-template-columns:1fr}}
+
+
+/* Desktop navbar fit: keep Hire Me visible without horizontal overflow */
+@media (min-width: 901px) {
+  header { padding: 14px 2.5% !important; gap: 16px; }
+  header .logo { font-size: clamp(22px, 1.7vw, 28px); white-space: nowrap; flex-shrink: 0; }
+  header nav { display: flex; align-items: center; justify-content: flex-end; flex: 1 1 auto; min-width: 0; gap: clamp(9px, 1.05vw, 17px) !important; white-space: nowrap; }
+  header nav a { font-size: clamp(12px, .92vw, 15px) !important; }
+  header nav .hire-nav { flex-shrink: 0; padding: 8px 12px !important; }
+}
