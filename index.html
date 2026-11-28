@@ -11,7 +11,7 @@
 <meta name="description"
 content="Portfolio of Sharan Akash - Cloud Computing Enthusiast">
 
-<link rel="stylesheet" href="style.css?v=theme-removed-20261126-8">
+<link rel="stylesheet" href="style.css?v=portfolio-upgrade-20261128-1">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -93,6 +93,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
 <a href="#education">Education</a>
 
 <a href="#certificates">Certificates</a>
+<a href="#journey">Journey</a>
+<a href="#github-activity">GitHub</a>
 <a href="#contact">Let's Connect</a>
 <a href="#contact" class="hire-nav"><i class="fas fa-handshake"></i> Hire Me</a>
 
@@ -308,9 +310,16 @@ and software development skills.
 
 </div>
 
+<div class="skill-filters" role="group" aria-label="Filter technical skills">
+  <button class="skill-filter active" type="button" data-skill-filter="all">All</button>
+  <button class="skill-filter" type="button" data-skill-filter="programming">Programming</button>
+  <button class="skill-filter" type="button" data-skill-filter="web">Web Development</button>
+  <button class="skill-filter" type="button" data-skill-filter="data">Database &amp; Tools</button>
+</div>
+
 <div class="skills-container">
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="programming">
 
 <i class="fab fa-java"></i>
 
@@ -320,7 +329,7 @@ and software development skills.
 
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="programming">
 
 <i class="fab fa-python"></i>
 
@@ -330,7 +339,7 @@ and software development skills.
 
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="web">
 
 <i class="fab fa-html5"></i>
 
@@ -340,7 +349,7 @@ and software development skills.
 
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="web">
 
 <i class="fab fa-css3-alt"></i>
 
@@ -350,7 +359,7 @@ and software development skills.
 
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="web">
 
 <i class="fab fa-js"></i>
 
@@ -360,7 +369,7 @@ and software development skills.
 
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="data">
 
 <i class="fas fa-database"></i>
 
@@ -370,7 +379,7 @@ and software development skills.
 
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="web">
 
 <i class="fab fa-node-js"></i>
 
@@ -380,7 +389,7 @@ and software development skills.
 
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill-category="data">
 
 <i class="fab fa-github"></i>
 
@@ -609,62 +618,61 @@ and software development skills.
 
 </section>
 
+<!-- ================= CAREER JOURNEY ================= -->
+<section id="journey" class="portfolio-extra-section">
+  <div class="section-title"><h2>My Journey</h2><p>Learning, building and growing in technology</p></div>
+  <div class="journey-timeline">
+    <article class="journey-item"><span class="journey-year">2024 — 2028</span><div><h3>B.E. Computer Science &amp; Engineering</h3><p>PSNA College of Engineering and Technology · Dindigul</p><small>Currently pursuing · CGPA 8.3</small></div></article>
+    <article class="journey-item"><span class="journey-year">PROJECTS</span><div><h3>Software &amp; Web Development</h3><p>Built projects including Railway Reservation, Travel Booking, Portfolio Website and AI-Powered Vehicle Logging &amp; ALPR System.</p></div></article>
+    <article class="journey-item"><span class="journey-year">CAREER GOAL</span><div><h3>Cloud Engineer &amp; Software Developer</h3><p>Focused on cloud technologies, application development and practical problem solving.</p></div></article>
+  </div>
+</section>
+
+<!-- ================= GITHUB ACTIVITY ================= -->
+<section id="github-activity" class="portfolio-extra-section">
+  <div class="section-title"><h2>GitHub Live Activity</h2><p>Public repositories and recent development activity</p></div>
+  <div class="github-profile-strip">
+    <div class="github-avatar" id="githubAvatar"><i class="fab fa-github"></i></div>
+    <div class="github-profile-copy"><h3 id="githubName">Loading GitHub profile…</h3><p id="githubBio">Fetching public profile details</p><a href="https://github.com/sharanakash2006" target="_blank" rel="noopener noreferrer">View GitHub Profile <i class="fas fa-arrow-up-right-from-square"></i></a></div>
+    <div class="github-stats"><div><strong id="githubRepos">—</strong><span>Repositories</span></div><div><strong id="githubFollowers">—</strong><span>Followers</span></div></div>
+  </div>
+  <div class="github-content-grid"><div class="github-panel"><h3><i class="fas fa-code-branch"></i> Latest Repositories</h3><div id="githubReposList" class="github-repos-list"><p class="muted-note">Loading public repositories…</p></div></div><div class="github-panel"><h3><i class="fas fa-bolt"></i> Recent Activity</h3><div id="githubEventsList" class="github-events-list"><p class="muted-note">Loading recent public events…</p></div></div></div>
+  <p class="github-footnote" id="githubStatus" aria-live="polite">Live data is loaded from the public GitHub API.</p>
+</section>
+
+<!-- ================= CODING PROFILES ================= -->
+<section id="coding-profiles" class="portfolio-extra-section">
+  <div class="section-title"><h2>Coding &amp; Professional Profiles</h2><p>Explore my work and professional presence</p></div>
+  <div class="profile-link-grid">
+    <a class="profile-link-card" href="https://github.com/sharanakash2006" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i><span><b>GitHub</b><small>Projects and repositories</small></span><i class="fas fa-arrow-up-right-from-square"></i></a>
+    <a class="profile-link-card" href="https://linkedin.com/in/sharan-akash-831026330" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i><span><b>LinkedIn</b><small>Professional profile</small></span><i class="fas fa-arrow-up-right-from-square"></i></a>
+    <div class="profile-link-card profile-pending"><i class="fas fa-laptop-code"></i><span><b>LeetCode</b><small>Profile link can be added</small></span><span class="pending-label">Coming soon</span></div>
+    <div class="profile-link-card profile-pending"><i class="fas fa-terminal"></i><span><b>HackerRank</b><small>Profile link can be added</small></span><span class="pending-label">Coming soon</span></div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ASSISTANT ================= -->
+<section id="portfolio-assistant" class="portfolio-extra-section">
+  <div class="section-title"><h2>Ask About My Portfolio</h2><p>A quick interactive assistant for recruiters and visitors</p></div>
+  <div class="assistant-shell">
+    <div class="assistant-heading"><span class="assistant-avatar"><i class="fas fa-robot"></i></span><div><b>Sharan's Portfolio Assistant</b><small><span class="assistant-online"></span> Available now · Instant answers</small></div></div>
+    <div class="assistant-messages" id="assistantMessages" aria-live="polite"><div class="assistant-bubble assistant-bot">Hi! Ask me about Sharan's skills, projects, education, career goal or contact details.</div></div>
+    <div class="assistant-quick-questions"><button type="button" data-assistant-question="What are your technical skills?">Skills</button><button type="button" data-assistant-question="Tell me about your projects">Projects</button><button type="button" data-assistant-question="What is your career goal?">Career goal</button><button type="button" data-assistant-question="How can I contact you?">Contact</button></div>
+    <form id="assistantForm" class="assistant-input-row"><input id="assistantInput" type="text" placeholder="Ask something about my portfolio…" autocomplete="off" aria-label="Ask the portfolio assistant"><button type="submit" aria-label="Send question"><i class="fas fa-paper-plane"></i></button></form>
+  </div>
+</section>
+
 <!-- ================= CERTIFICATES ================= -->
 
-<section id="certificates">
-
-<div class="section-title">
-
-<h2>Certificates</h2>
-
-<p>My Learning Journey</p>
-
-</div>
-
-<div class="certificate-container">
-
-<div class="certificate-card">
-
-<i class="fab fa-aws"></i>
-
-<h3>AWS Cloud</h3>
-
-<p>AWS Cloud Foundation</p>
-
-</div>
-
-<div class="certificate-card">
-
-<i class="fab fa-java"></i>
-
-<h3>Java</h3>
-
-<p>Java Programming</p>
-
-</div>
-
-<div class="certificate-card">
-
-<i class="fab fa-python"></i>
-
-<h3>Python</h3>
-
-<p>Python Programming</p>
-
-</div>
-
-<div class="certificate-card">
-
-<i class="fas fa-code"></i>
-
-<h3>Web Development</h3>
-
-<p>HTML • CSS • JavaScript</p>
-
-</div>
-
-</div>
-
+<section id="certificates" class="portfolio-extra-section">
+  <div class="section-title"><h2>Certifications &amp; Achievements</h2><p>Verified credentials and learning milestones</p></div>
+  <div class="credential-notice"><i class="fas fa-award"></i><div><b>Certificate showcase</b><p>Certificate titles and credential links will be published here once the verified files or URLs are added.</p></div></div>
+  <div class="certificate-container">
+    <div class="certificate-card"><i class="fab fa-aws"></i><h3>Cloud Computing</h3><p>Certificate link to be added</p><span class="credential-pending">Credential pending</span></div>
+    <div class="certificate-card"><i class="fab fa-java"></i><h3>Java Programming</h3><p>Certificate link to be added</p><span class="credential-pending">Credential pending</span></div>
+    <div class="certificate-card"><i class="fab fa-python"></i><h3>Python Programming</h3><p>Certificate link to be added</p><span class="credential-pending">Credential pending</span></div>
+    <div class="certificate-card"><i class="fas fa-code"></i><h3>Web Development</h3><p>Certificate link to be added</p><span class="credential-pending">Credential pending</span></div>
+  </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
@@ -675,7 +683,7 @@ and software development skills.
 
 <h2>Let's Connect</h2>
 
-<p>Feel free to contact me anytime</p>
+<p>Open to internship, placement and software development opportunities</p><span class="availability-pill"><i class="fas fa-circle"></i> Open to Opportunities</span>
 
 </div>
 
@@ -765,7 +773,7 @@ github.com/sharanakash2006
 
 <div class="contact-form">
 
-<form id="contactForm" action="https://formsubmit.co/sharanakash2006@gmail.com" method="POST">
+<form id="contactForm">
 
 <input type="hidden" name="_subject" value="New portfolio enquiry">
 <input type="hidden" name="_template" value="table">
@@ -803,6 +811,7 @@ required></textarea>
 Send Message
 
 </button>
+<p class="form-note">Your email app will open with your message ready to send. You can review it before sending.</p>
 
 </form>
 
@@ -877,7 +886,7 @@ All Rights Reserved.
 </button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js" defer></script>
-<script src="script.js?v=theme-removed-20261126-8" defer></script>
+<script src="script.js?v=portfolio-upgrade-20261128-1" defer></script>
 
 </body>
 
