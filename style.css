@@ -4852,3 +4852,37 @@ body.light-theme .welcome-screen * { color:inherit; }
     transition-duration:.01ms !important;
   }
 }
+
+
+/* Hire Me call-to-action */
+.hire-nav {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px !important;
+  border: 1px solid rgba(255, 65, 91, .75);
+  border-radius: 999px;
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff3157, #c9163c);
+  box-shadow: 0 7px 24px rgba(255, 49, 87, .22);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.hire-nav:hover, .hire-me-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 49, 87, .35);
+}
+.hire-me-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff3157, #c9163c) !important;
+  border: 1px solid rgba(255, 120, 140, .7) !important;
+  box-shadow: 0 8px 26px rgba(255, 49, 87, .2);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+@media (max-width: 760px) {
+  .hire-nav { margin: 8px 0; justify-content: center; }
+  .hire-me-btn { margin-top: 8px; }
+}
