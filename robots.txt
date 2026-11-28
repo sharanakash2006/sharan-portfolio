@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sharanakash2006.github.io/sharan-portfolio/sitemap.xml
