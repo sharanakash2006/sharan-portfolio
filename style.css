@@ -5220,3 +5220,28 @@ body #contact .contact-form button{justify-self:stretch!important;border-radius:
   .welcome-screen .welcome-orb-one,.welcome-screen .welcome-orb-two{animation:none!important}
   .welcome-screen .welcome-content{animation:none!important}
 }
+
+
+/* RESTORE THE ORIGINAL PORTRAIT ABOVE THE BACKGROUND LAYERS */
+.welcome-screen{isolation:isolate!important;background:#050507!important}
+.welcome-screen .welcome-live-video{position:absolute!important;inset:0!important;z-index:-2!important;width:100%!important;height:100%!important;object-fit:cover!important;opacity:.16!important}
+.welcome-screen .welcome-portrait-bg{
+  position:absolute!important;inset:0!important;z-index:0!important;
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:72% 34%!important;
+  opacity:.92!important;visibility:visible!important;
+  filter:saturate(.92) contrast(1.04)!important;
+}
+.welcome-screen .welcome-backdrop{
+  position:absolute!important;inset:0!important;z-index:1!important;
+  background:
+    linear-gradient(90deg,rgba(3,3,5,.98) 0%,rgba(3,3,5,.91) 31%,rgba(3,3,5,.48) 53%,rgba(3,3,5,.12) 100%),
+    linear-gradient(0deg,rgba(3,3,5,.56),transparent 42%,rgba(3,3,5,.12))!important;
+}
+.welcome-screen .welcome-video-vignette{position:absolute!important;inset:0!important;z-index:2!important;pointer-events:none!important;background:linear-gradient(90deg,rgba(2,2,4,.12),transparent 58%),linear-gradient(0deg,rgba(2,2,4,.18),transparent 35%)!important}
+.welcome-screen .welcome-visual,.welcome-screen .welcome-orb{z-index:3!important}
+.welcome-screen .welcome-content{z-index:4!important}
+@media(max-width:760px){
+ .welcome-screen .welcome-portrait-bg{object-position:66% center!important;opacity:.48!important}
+ .welcome-screen .welcome-backdrop{background:linear-gradient(90deg,rgba(3,3,5,.94),rgba(3,3,5,.62)),linear-gradient(0deg,rgba(3,3,5,.65),transparent)!important}
+}
