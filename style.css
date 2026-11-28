@@ -5548,3 +5548,39 @@ body #contact .contact-form button{justify-self:stretch!important;border-radius:
   -webkit-background-clip:text!important;
   -webkit-text-fill-color:transparent!important;
 }
+
+/* DEFINITIVE DESKTOP WELCOME LAYOUT FIX — avoid viewport-edge clipping */
+.welcome-screen{
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  padding:clamp(24px,5vw,80px)!important;
+}
+.welcome-screen .welcome-content{
+  position:relative!important;left:auto!important;right:auto!important;top:auto!important;
+  transform:none!important;width:min(58vw,900px)!important;max-width:900px!important;
+  margin:0!important;text-align:left!important;align-items:flex-start!important;
+  padding:0!important;overflow:visible!important;
+}
+.welcome-screen .welcome-monogram{ text-align:left!important; }
+.welcome-screen .welcome-kicker{justify-content:flex-start!important;}
+.welcome-screen #welcomeTitle{
+  width:auto!important;max-width:100%!important;
+  font-size:clamp(42px,6.3vw,94px)!important;
+  line-height:.98!important;letter-spacing:-.045em!important;
+  overflow:visible!important;word-break:normal!important;
+}
+.welcome-screen #welcomeTitle span{
+  display:inline!important;position:static!important;
+  color:transparent!important;background-color:transparent!important;
+  background-image:linear-gradient(95deg,#ff3156 0%,#ff6b82 48%,#d8173e 100%)!important;
+  background-clip:text!important;-webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  box-decoration-break:clone!important;-webkit-box-decoration-break:clone!important;
+}
+.welcome-screen .welcome-intro{margin-left:0!important;margin-right:0!important;text-align:left!important;}
+.welcome-screen .welcome-actions{justify-content:flex-start!important;}
+.welcome-screen .welcome-foot{justify-content:space-between!important;}
+@media(max-width:760px){
+ .welcome-screen{padding:22px!important}
+ .welcome-screen .welcome-content{width:100%!important;max-width:100%!important}
+ .welcome-screen #welcomeTitle{font-size:clamp(38px,10vw,64px)!important}
+}
