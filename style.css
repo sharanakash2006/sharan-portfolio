@@ -5531,3 +5531,21 @@ body #contact .contact-form button{justify-self:stretch!important;border-radius:
  .welcome-screen .gaming-laser,.welcome-screen .gaming-scanline,
  .welcome-screen .welcome-enter::after{animation:none!important}
 }
+
+
+/* ALIGN WELCOME COPY BACK TO THE LEFT — desktop only */
+@media(min-width:761px){
+  .welcome-screen .welcome-content{
+    position:relative!important;
+    left:clamp(-145px,-8vw,-90px)!important;
+    margin-left:0!important;
+    margin-right:auto!important;
+  }
+}
+@media(max-width:760px){
+  .welcome-screen .welcome-content{
+    left:0!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+}
