@@ -5584,3 +5584,15 @@ body #contact .contact-form button{justify-self:stretch!important;border-radius:
  .welcome-screen .welcome-content{width:100%!important;max-width:100%!important}
  .welcome-screen #welcomeTitle{font-size:clamp(38px,10vw,64px)!important}
 }
+
+/* PORTRAIT VISIBILITY FIX — keep the portrait unobstructed on the right */
+.welcome-screen{position:fixed!important;isolation:isolate!important;overflow:hidden!important;background:#020204!important}
+.welcome-screen .welcome-portrait-bg{position:absolute!important;inset:0 0 0 auto!important;width:68%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:68% 28%!important;opacity:1!important;visibility:visible!important;z-index:1!important;filter:saturate(1.08) contrast(1.04)!important}
+.welcome-screen .welcome-backdrop{position:absolute!important;inset:0!important;z-index:2!important;background:linear-gradient(90deg,#020204 0%,rgba(2,2,4,.97) 28%,rgba(2,2,4,.78) 43%,rgba(2,2,4,.18) 66%,rgba(2,2,4,.02) 100%)!important}
+.welcome-screen .welcome-live-video{z-index:0!important;opacity:.12!important}
+.welcome-screen .welcome-gaming-scene,.welcome-screen .welcome-particle-canvas{z-index:3!important;pointer-events:none!important}
+.welcome-screen .welcome-visual,.welcome-screen .welcome-orb{z-index:3!important;pointer-events:none!important}
+.welcome-screen .welcome-content{position:relative!important;z-index:6!important;width:min(53%,760px)!important;max-width:760px!important;margin:0 auto 0 0!important;padding:0!important;left:auto!important;right:auto!important;transform:none!important}
+.welcome-screen #welcomeTitle{font-size:clamp(42px,6.1vw,88px)!important;line-height:.98!important}
+.welcome-screen .welcome-hud{z-index:7!important}
+@media(max-width:760px){.welcome-screen .welcome-portrait-bg{width:100%!important;object-position:66% center!important;opacity:.55!important}.welcome-screen .welcome-backdrop{background:linear-gradient(90deg,rgba(2,2,4,.88),rgba(2,2,4,.5)),linear-gradient(0deg,rgba(2,2,4,.45),transparent)!important}.welcome-screen .welcome-content{width:100%!important;max-width:100%!important}}
