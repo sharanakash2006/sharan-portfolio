@@ -5615,3 +5615,27 @@ body #contact .contact-form button{justify-self:stretch!important;border-radius:
 .sa-loader-mark>span>span{color:#ff365b}
 .sa-loader-mark>i{position:absolute;right:10px;bottom:10px;width:7px;height:7px;border-radius:50%;background:#ff365b;box-shadow:0 0 12px #ff365b}
 @media(max-width:760px){.sa-emblem{margin-bottom:24px!important}.sa-emblem .sa-mark{width:56px;height:56px;font-size:32px}.sa-emblem>b{font-size:8px;letter-spacing:2px}.sa-brand-name{font-size:10px}}
+
+/* ALTERNATE LOGO CONCEPT — orbital signature / clean futuristic wordmark */
+.orbit-brand,.orbit-emblem{display:inline-flex!important;align-items:center!important;gap:13px!important;text-decoration:none!important;white-space:nowrap!important}
+.orbit-brand-symbol,.orbit-emblem-symbol{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:43px;height:43px;border:1px solid rgba(255,255,255,.48);border-radius:50%;background:radial-gradient(circle at 35% 25%,rgba(255,255,255,.16),rgba(12,8,12,.92) 65%);box-shadow:0 0 0 4px rgba(255,255,255,.035),0 0 22px rgba(255,37,76,.18);font-family:Georgia,serif}
+.orbit-brand-symbol:before,.orbit-emblem-symbol:before{content:"";position:absolute;inset:-5px;border:1px solid rgba(255,55,88,.8);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;transform:rotate(-28deg)}
+.orbit-brand-symbol:after,.orbit-emblem-symbol:after{content:"";position:absolute;width:6px;height:6px;right:-4px;top:6px;border-radius:50%;background:#ff365b;box-shadow:0 0 12px #ff365b}
+.orbit-brand-symbol>b,.orbit-emblem-symbol>b{font-size:23px;font-weight:500;color:#fff;transform:translateX(3px)}
+.orbit-brand-symbol>i,.orbit-emblem-symbol>i{font-size:23px;font-style:normal;font-weight:500;color:#ff365b;transform:translateX(-3px)}
+.orbit-brand-symbol>em,.orbit-emblem-symbol>em{position:absolute;inset:8px;border:1px solid rgba(255,255,255,.13);border-radius:50%}
+.orbit-brand-type,.orbit-emblem-type{display:flex;flex-direction:column;gap:5px;text-align:left}
+.orbit-brand-type strong,.orbit-emblem-type strong{font:800 12px/1 Arial,sans-serif;letter-spacing:2.3px;color:#fff}
+.orbit-brand-type small,.orbit-emblem-type small{font:700 7px/1 Arial,sans-serif;letter-spacing:1.7px;color:#c5aab1}
+.orbit-brand-type small i{font-style:normal;color:#ff365b;padding:0 2px}
+.orbit-emblem{gap:15px!important;margin-bottom:34px!important}
+.orbit-emblem-symbol{width:62px;height:62px}
+.orbit-emblem-symbol>b,.orbit-emblem-symbol>i{font-size:34px}
+.orbit-emblem-symbol:before{inset:-7px}
+.orbit-emblem-type strong{font-size:10px;letter-spacing:3px}
+.orbit-emblem-type small{font-size:7px;letter-spacing:2px}
+.orbit-loader-mark{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;width:70px;height:70px;margin:0 auto 18px!important;border:1px solid rgba(255,255,255,.48)!important;border-radius:50%!important;background:radial-gradient(circle at 35% 25%,#30212a,#050505 70%)!important;box-shadow:0 0 0 6px rgba(255,255,255,.035),0 0 35px rgba(255,37,76,.25)!important;font:500 37px Georgia,serif!important;color:#fff!important;letter-spacing:-8px!important}
+.orbit-loader-mark:before{content:"";position:absolute;inset:-7px;border:1px solid #ff365b;border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;transform:rotate(-28deg)}
+.orbit-loader-mark>i{font-style:normal;color:#ff365b}
+.orbit-loader-mark>b{position:absolute;right:-5px;top:10px;width:7px;height:7px;border-radius:50%;background:#ff365b;box-shadow:0 0 13px #ff365b}
+@media(max-width:760px){.orbit-emblem{gap:12px!important;margin-bottom:24px!important}.orbit-emblem-symbol{width:54px;height:54px}.orbit-emblem-symbol>b,.orbit-emblem-symbol>i{font-size:29px}.orbit-emblem-type strong{font-size:9px}}
