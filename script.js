@@ -410,3 +410,143 @@ if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").mat
   });
   enter.focus({ preventScroll: true });
 })();
+
+
+// ===== Interactive skill filters =====
+(() => {
+  const filters = document.querySelectorAll("[data-skill-filter]");
+  const cards = document.querySelectorAll(".skill-card[data-skill-category]");
+  filters.forEach(button => button.addEventListener("click", () => {
+    const selected = button.dataset.skillFilter;
+    filters.forEach(item => item.classList.toggle("active", item === button));
+    cards.forEach(card => { card.hidden = selected !== "all" && card.dataset.skillCategory !== selected; });
+  }));
+})();
+
+// ===== Live public GitHub profile, repositories and recent events =====
+(() => {
+  const user = "sharanakash2006";
+  const byId = id => document.getElementById(id);
+  const reposNode = byId("githubReposList");
+  if (!reposNode) return;
+  const make = (tag, className, value) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (value !== undefined) node.textContent = value;
+    return node;
+  };
+  const addLine = (parent, text) => parent.appendChild(make("p", "muted-note", text));
+  const dateText = value => {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? "" : date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  };
+  Promise.all([
+    fetch(`https://api.github.com/users/${user}`),
+    fetch(`https://api.github.com/users/${user}/repos?sort=updated&per_page=6`),
+    fetch(`https://api.github.com/users/${user}/events/public?per_page=6`)
+  ]).then(async responses => {
+    if (responses.some(response => !response.ok)) throw new Error("GitHub API is temporarily unavailable.");
+    return Promise.all(responses.map(response => response.json()));
+  }).then(([profile, repos, events]) => {
+    const name = byId("githubName");
+    const bio = byId("githubBio");
+    if (name) name.textContent = profile.name || profile.login || user;
+    if (bio) bio.textContent = profile.bio || "Public GitHub profile and repositories";
+    const avatar = byId("githubAvatar");
+    if (avatar && profile.avatar_url) {
+      avatar.replaceChildren();
+      const image = make("img");
+      image.src = profile.avatar_url;
+      image.alt = "GitHub profile avatar";
+      avatar.appendChild(image);
+    }
+    if (byId("githubRepos")) byId("githubRepos").textContent = profile.public_repos ?? "—";
+    if (byId("githubFollowers")) byId("githubFollowers").textContent = profile.followers ?? "—";
+    reposNode.replaceChildren();
+    if (!Array.isArray(repos) || repos.length === 0) addLine(reposNode, "No public repositories were returned.");
+    else repos.forEach(repo => {
+      const item = make("article", "github-repo-item");
+      const link = make("a", "", repo.name);
+      link.href = repo.html_url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      item.appendChild(link);
+      if (repo.description) item.appendChild(make("p", "", repo.description));
+      const meta = make("div", "repo-meta");
+      if (repo.language) meta.appendChild(make("span", "", repo.language));
+      meta.appendChild(make("span", "", `★ ${repo.stargazers_count}`));
+      meta.appendChild(make("span", "", `Updated ${dateText(repo.updated_at)}`));
+      item.appendChild(meta);
+      reposNode.appendChild(item);
+    });
+    const eventsNode = byId("githubEventsList");
+    if (eventsNode) {
+      eventsNode.replaceChildren();
+      if (!Array.isArray(events) || events.length === 0) addLine(eventsNode, "No recent public events are available yet.");
+      else events.slice(0, 5).forEach(event => {
+        const item = make("article", "github-event-item");
+        const repoName = event.repo?.name || "GitHub";
+        const eventLabel = ({ PushEvent: "Pushed code to", CreateEvent: "Created", WatchEvent: "Starred", IssuesEvent: "Updated an issue in", PullRequestEvent: "Updated a pull request in", ForkEvent: "Forked" })[event.type] || event.type.replace("Event", "");
+        item.appendChild(make("p", "", `${eventLabel} ${repoName}`));
+        item.appendChild(make("div", "repo-meta", dateText(event.created_at)));
+        eventsNode.appendChild(item);
+      });
+    }
+    if (byId("githubStatus")) byId("githubStatus").textContent = "Live public data from GitHub · Last refreshed when this page loaded.";
+  }).catch(() => {
+    addLine(reposNode, "Could not load live GitHub data right now. Visit the GitHub profile directly.");
+    if (byId("githubEventsList")) addLine(byId("githubEventsList"), "Recent activity is temporarily unavailable.");
+    if (byId("githubStatus")) byId("githubStatus").textContent = "GitHub's public API may be temporarily unavailable or rate-limited.";
+  });
+})();
+
+// ===== Portfolio FAQ assistant (runs locally; no API key required) =====
+(() => {
+  const form = document.getElementById("assistantForm");
+  const input = document.getElementById("assistantInput");
+  const messages = document.getElementById("assistantMessages");
+  if (!form || !input || !messages) return;
+  const answerFor = question => {
+    const q = question.toLowerCase();
+    if (/skill|technology|programming|language/.test(q)) return "Sharan's listed skills include Java, Python, HTML5, CSS3, JavaScript, MongoDB, Node.js and GitHub.";
+    if (/project|work|built|alpr|vehicle|railway|travel/.test(q)) return "Featured projects include a Railway Reservation System, Travel Booking Website, Portfolio Website and AI-Powered Vehicle Logging & ALPR System. Open the Projects section to explore them.";
+    if (/career|goal|role|cloud engineer|developer/.test(q)) return "Sharan's career goal is to become a Cloud Engineer and Software Developer, focusing on cloud technologies and practical software applications.";
+    if (/education|college|cgpa|study|degree/.test(q)) return "Sharan is pursuing B.E. Computer Science and Engineering (2024–2028) at PSNA College of Engineering and Technology, with a listed CGPA of 8.3.";
+    if (/contact|email|hire|reach|phone|message/.test(q)) return "You can contact Sharan at sharanakash2006@gmail.com, call +91 9025722323, or use the Hire Me button and contact form.";
+    if (/github|repository|repo|code/.test(q)) return "Visit github.com/sharanakash2006 or explore the GitHub Live Activity section for public repositories and recent activity.";
+    if (/certificate|certification|achievement/.test(q)) return "The Certificates section is ready to showcase verified credentials. Certificate files or public credential links can be added there.";
+    return "I can help with questions about skills, projects, education, career goals, GitHub or contact details. Try one of the quick questions above.";
+  };
+  const addMessage = (text, who) => {
+    const bubble = document.createElement("div");
+    bubble.className = `assistant-bubble ${who === "user" ? "assistant-user" : "assistant-bot"}`;
+    bubble.textContent = text;
+    messages.appendChild(bubble);
+    messages.scrollTop = messages.scrollHeight;
+  };
+  const ask = question => {
+    const clean = question.trim();
+    if (!clean) return;
+    addMessage(clean, "user");
+    addMessage(answerFor(clean), "bot");
+    input.value = "";
+  };
+  form.addEventListener("submit", event => { event.preventDefault(); ask(input.value); });
+  document.querySelectorAll("[data-assistant-question]").forEach(button => button.addEventListener("click", () => ask(button.dataset.assistantQuestion || "")));
+})();
+
+// ===== Contact form: prepare an email in the visitor's email app =====
+(() => {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    const subject = encodeURIComponent(`Portfolio enquiry from ${data.get("name") || "Website visitor"}`);
+    const body = encodeURIComponent(
+      `Name: ${data.get("name") || ""}\nEmail: ${data.get("email") || ""}\nCompany: ${data.get("company") || "Not provided"}\n\nMessage:\n${data.get("message") || ""}`
+    );
+    window.location.href = `mailto:sharanakash2006@gmail.com?subject=${subject}&body=${body}`;
+  });
+})();
